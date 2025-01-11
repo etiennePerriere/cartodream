@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title> Carte interactive </title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -63,34 +62,21 @@
 		<script type="text/javascript" src="donnees/POI.js"></script>
 		<script type="text/javascript" src="donnees/batiments.js"></script>
 		<script type="text:javascript" src="donnes/popup.js"></script>
-		
-		
 		<script type="text/javascript" src="donnees/sentiers_PDIPR.js"></script>
-		<script>
-	
 
-		</script>
 		<style>
 			body,
 			.title {
-    color: black;
-	
-    font-family: 'Roboto', sans-serif;
-	
-    font-weight: 100px;
-}
+				color: black;
+				font-family: 'Roboto', sans-serif;
+				font-weight: 100px;
+			}
 
-.mapTitle {
-    position: absolute;
-	background-color: azure;
-	max-width: 50%;
-	opacity: 80%;
-    top: -10px;
-    right: 35%;
-    z-index: 999;
-    margin-left: 20%;
-}
+			.mapTitle {
+				margin-left: 20%;
+			}
 		</style>
+		
 		<script>
 		popupOptions = {minWidth:350, maxWidth:350, maxHeight:400, closeButton:true}; //on défini la largeur max des popups à 400 pixels
 		var map;
@@ -115,12 +101,12 @@
 		}
 		
 		function initialize() {
-		
-		/************************************************************************************************************************/
-		/******************************************************* LA CARTE *******************************************************/
-		/************************************************************************************************************************/
+			/************************************************************************************************************************/
+			/******************************************************* LA CARTE *******************************************************/
+			/************************************************************************************************************************/
 
-//*******************CHARGEMENT DE LA CARTE***********************	
+			//*******************CHARGEMENT DE LA CARTE***********************	
+			
 			//définition des options de la carte : centre, zoom, zoom maximum
 			var point = new L.LatLng(48.231310963576654, -3.2563495712161874);
 			var optionsDefaut = {
@@ -132,56 +118,54 @@
 			};
 
 			//création de la carte et ajout du fond de carte
-			map = new L.Map('mymap', optionsDefaut);			
-			var mapboxtest = new L.TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png	', {
-				attribution: 'Données 11/2024, Cartographie : <a href="https://www.linkedin.com/in/alexandreponchon/">Alexandre PONCHON </a> , <a href="https://www.openstreetmap.fr/">OSM</a>'});
+			map = new L.Map('mymap', optionsDefaut);
+			var mapboxtest = new L.TileLayer(
+				'https://tile.openstreetmap.org/{z}/{x}/{y}.png	',
+				{attribution: 'Données 11/2024, Cartographie : <a href="https://www.linkedin.com/in/alexandreponchon/">Alexandre PONCHON </a> , <a href="https://www.openstreetmap.fr/">OSM</a>'}
+			);
 			map.addLayer(mapboxtest);
-			
-			
+
 			//ajout des controles de la carte : zoom, échelle, contrôle des couches
 			map.addControl(L.control.zoom({position: 'topright'}));
 			map.addControl(L.control.scale({
 				position: 'bottomright',
 				imperial: false
-			}));	
+			}));
 	
-//*******************ajout couche perimetre OTPH***************************************************************			
+			//*******************ajout couche perimetre OTPH***************************************************************			
 
-				// Set up styles for subway lines
+			// Set up styles for subway lines
 			
 			function batimentsStyle(feature) {
-				return {weight: 5,
-						opacity: 1,
-						borderColor : '#0f0f0f',
-						
-						fillOpacity: 0,
-						interactive: true,
+				return {
+					weight: 5,
+					opacity: 1,
+					borderColor : '#0f0f0f',
+					
+					fillOpacity: 0,
+					interactive: true,
 				};
 			}      
 			function communesStyle(feature) {
-				return {weight: 1,
-						opacity: 1,
-						color:'#0f0f0f',
-						
-						
-						fillOpacity: 0,
-						interactive: false,
+				return {
+					weight: 1,
+					opacity: 1,
+					color:'#0f0f0f',
+					fillOpacity: 0,
+					interactive: false,
 				};
 			} 
-			var bat = L.geoJson(communes,{
-				style: communesStyle, 
-		
-				
-			}).addTo(map);
+			var bat = L.geoJson(
+				communes,
+				{style: communesStyle}
+			).addTo(map);
+
 			routeLayers["bat"]=bat;
-		
-			
-			
-			
+
 			//  fin couche  -----------------------------------------------
 					
 
-//*****************CREATION DES PICTOS************************
+			//*****************CREATION DES PICTOS************************
 			function categorieToPicto(categorie) {
 				var file_name;
 				file_name = categorie.replace(/ /gi,'_');
@@ -217,10 +201,10 @@
 				}
 			}
 			
-// *******************TEST*************************
-// contenu popup sentiers PDIPR
-/*
-function onEachFeature2(feature, layer) {
+			// *******************TEST*************************
+			// contenu popup sentiers PDIPR
+			/*
+			function onEachFeature2(feature, layer) {
 				var popupContent = "";
 				if (feature.properties && feature.properties.nom) {
 					popupContent += '<h6><b>'+feature.properties.nom+'</b></h6>';
@@ -244,8 +228,9 @@ function onEachFeature2(feature, layer) {
 				layer.bindPopup(popupContent);
 			}
 			*/
-				// Crée un style ( une couleur différente pour chacun) pour les sentiers
-				// Set up styles for subway lines
+
+			// Crée un style ( une couleur différente pour chacun) pour les sentiers
+			// Set up styles for subway lines
 			function sentierStyle(feature) {
 				return {
 					"color": feature.properties.couleur,
@@ -255,17 +240,17 @@ function onEachFeature2(feature, layer) {
 					"fillOpacity": 0,
 					"clickable": false
 				};
-			}          
-							
-				//ajout sentiers PDIPR
-			var sentiers_pdipr = L.geoJson(sentiersPDIPR,{
-				style: sentierStyle, 
-				
-			})
-		
-		// https://github.com/naomap/leaflet-fusesearch/blob/master/src/leaflet.fusesearch.js
-	L.Control.CustomFuseSearch = L.Control.FuseSearch.extend({
-				
+			}
+
+			//ajout sentiers PDIPR
+			var sentiers_pdipr = L.geoJson(
+				sentiersPDIPR,
+				{style: sentierStyle}
+			)
+
+			// https://github.com/naomap/leaflet-fusesearch/blob/master/src/leaflet.fusesearch.js
+			L.Control.CustomFuseSearch = L.Control.FuseSearch.extend({
+
 				// Surcharge de la méthode createResultItem de FuseSearch
 				createResultItem: function(props, container, popup) {
 					var _this = this;
@@ -292,7 +277,6 @@ function onEachFeature2(feature, layer) {
 							var latitude = feature.geometry.coordinates[1];
 							map.flyTo([latitude, longitude], 16);
 						};
-						// Fin de la personnalisation
 					}
 
 					// Fill in the container with the user-supplied function if any,
@@ -308,16 +292,17 @@ function onEachFeature2(feature, layer) {
 					};
 
 					return resultItem;
-				},
+				}
 			});
 
 			// controle Fuzzy search en utilisant la version personnalisée de FuseSearch
 			var searchCtrl = new L.Control.CustomFuseSearch({});
 			searchCtrl.addTo(map);
 			
-	// https://github.com/naomap/leaflet-fusesearch#usage
-	searchCtrl.indexFeatures(poi, ["nom","ville"]);	
-// *******************FIN TEST*************************
+			// https://github.com/naomap/leaflet-fusesearch#usage
+			searchCtrl.indexFeatures(poi, ["nom","ville"]);	
+
+			// *******************FIN TEST*************************
 
 			for(var i=0; i < sentiers_pdipr.length;i++){
 				var currentFeaturepdipr = sentiers_pdipr.feature[i];
@@ -326,7 +311,8 @@ function onEachFeature2(feature, layer) {
 				}
 				
 			}
-// *******************DEFINITION DE L'AFFICHAGE DE BASE DES DONNEES*************************
+
+			// *******************DEFINITION DE L'AFFICHAGE DE BASE DES DONNEES*************************
 			for(var i = 0; i < poi.features.length; i++) { // pour chaque entité du fichier geoJson POI
 				var currentFeature = poi.features[i]; // on récupère l'entité courante dans une variable currentFeature
 				// On récupère les catégories pour chaque feature
@@ -344,16 +330,11 @@ function onEachFeature2(feature, layer) {
 					"feature": currentFeature,
 					"marker": optionsAffichageDonnees.pointToLayer(currentFeature, L.latLng(currentFeature.geometry.coordinates[1], currentFeature.geometry.coordinates[0]))
 				};
-				// définition des popup et de leur contenu
 
-
-			
-				
-
-
-				var popupContent = 
-				
-				'<b><img class="imageflottante" src ="image/'+currentFeature.properties.logo+'.png" style="max-width:80px;max-height:60px;"></a><font size="3pt"><center>'+currentFeature.properties.nom+'</center></font></b>'  // on créé une variable correspondant au contenu de la popup. On commence par lui affecter l'intitulé de l'entité
+				// Définition des popup et de leur contenu
+				var popupContent =
+				// Intitulé de l'entité + logo
+				'<b><img class="imageflottante" src ="image/'+currentFeature.properties.logo+'.png" style="max-width:80px;max-height:60px;"></a><font size="3pt"><center>'+currentFeature.properties.nom+'</center></font></b>'
 				
 				//if (currentFeature.properties.logo != null && currentFeature.properties.logo != "") { // si l'entité courante contient un lien ou plusieurs liens vers des photos
 				//	var photos = currentFeature.properties.logo; // On récupère les photos dans une variable
@@ -361,10 +342,9 @@ function onEachFeature2(feature, layer) {
 				//	popupContent += '<img class="imageflottante" src ="image/'+currentFeature.properties.logo+'.png" style="width:50px;height:50px;"></a><br>';
 				if ((currentFeature.properties.prenom_contact != null) && (currentFeature.properties.prenom_contact != ""))
 					popupContent += '<b> Contact : </b>'+currentFeature.properties.prenom_contact+' '+currentFeature.properties.nom_contact+'<br>';
-					if ((currentFeature.properties.Fonction != null) && (currentFeature.properties.Fonction != ""))
+				if ((currentFeature.properties.Fonction != null) && (currentFeature.properties.Fonction != ""))
 					popupContent += '<b> Fonction : </b>'+currentFeature.properties.Fonction+'<br>';
 
-				
 				if ((currentFeature.properties.tel != null) && (currentFeature.properties.tel != ""))
 					popupContent += '<b>Tél: </b>'+currentFeature.properties.tel+'<br>';
 					
@@ -479,33 +459,29 @@ function onEachFeature2(feature, layer) {
 					map.on('popupclose',function(event){
 					map.removeLayer(layerGroup1);
 			})	})
-				
-				
-					
-				
+
 				if (typeof(poiLayers[currentFeature.properties.id].marker)!="undefined") {
-				poiLayers[currentFeature.properties.id].marker.bindPopup (popupContent, popupOptions);
-				
-				// ajoute un événement "popupopen" au marker qui va exécuter la fonction suivante une fois la popup ouverte
-				poiLayers[currentFeature.properties.id].marker.on("popupopen", function() {
-					// on lance le slider à l'ouverture de la popup
-					$(".rslides").responsiveSlides({
-						auto: true,
-						pager: true,
-						nav: false,
-						speed: 500,
-						namespace: "centered-btns"
+					poiLayers[currentFeature.properties.id].marker.bindPopup (popupContent, popupOptions);
+					
+					// ajoute un événement "popupopen" au marker qui va exécuter la fonction suivante une fois la popup ouverte
+					poiLayers[currentFeature.properties.id].marker.on("popupopen", function() {
+						// on lance le slider à l'ouverture de la popup
+						$(".rslides").responsiveSlides({
+							auto: true,
+							pager: true,
+							nav: false,
+							speed: 500,
+							namespace: "centered-btns"
+						});
 					});
-				});
-				// on ajoute à notre marker-cluster une couche contenant le marker correspondant à l'entité courante
-				markers.addLayer(poiLayers[currentFeature.properties.id].marker);
-				
+					// on ajoute à notre marker-cluster une couche contenant le marker correspondant à l'entité courante
+					markers.addLayer(poiLayers[currentFeature.properties.id].marker);
 				}
 			}
 			
 			map.addLayer(markers); // on ajoute notre 'markerClusterGroup' à la carte 
 			
-//**********************LEGENDE***************************	
+			//**********************LEGENDE***************************	
 
 			// Fonction qui retourne le code couleur correspondant à l'élément passé en paramètre de la forme CTPN, CMPN, AMAPN, AAPN, APAPN	
 			for(var i = 0; i < poi.features.length; i++) { // pour chaque entité du fichier geoJson POI
@@ -517,48 +493,44 @@ function onEachFeature2(feature, layer) {
 				if (currentFeature2.properties.sous_cat!=null) // si l'entité courante possède une sous catégorie
 					tabCategories2[currentFeature2.properties.categorie][currentFeature2.properties.etape] = true; // on lui affecte 'true' qui indiquera que les entités appartenant à cette sous-catégorie doivent être affichées sur la carte (au lancement de l'application)
 				else // si l'entité courante ne possède pas de sous-catégorie, c'est donc que sa catégorie ne possède pas de sous-catégories
-					tabCategories2[currentFeature2.properties.categorie]=true; // on affecte 'true' directement à cette catégorie dans le tableau tabCategories, ce qui indique que les entités appartenant à cette catégorie doivent être affichées sur la carte (au lancement de l'application)
-				
+					tabCategories2[currentFeature2.properties.categorie] = true; // on affecte 'true' directement à cette catégorie dans le tableau tabCategories, ce qui indique que les entités appartenant à cette catégorie doivent être affichées sur la carte (au lancement de l'application)
+
 				// On récupère les features et on créé leur couche associée. Pour le fonctionnement des clusters, on récupère le marker correspondant à chaque feature.
 				// L'index correspond à l'identifiant de la feature (supposé unique)
-			
-				};
-				// définition des popup et de leur contenu
-			
-			var selectCategories = ''
+			};
+
+			// définition des popup et de leur contenu
+
 
 			// Ajout de toutes les catégories au menu de gauche
-			for (i in tabCategories){
-				selectCategories += '<li ; onclick="displayCategories(this)">&nbsp; Porte un dispositif dédié aux :</li><div>'
+			var selectCategories = ''
+			for (i in tabCategories) {
+				selectCategories += '<li ; onclick="displayCategories(this)">&nbsp; Porte un dispositif dédié aux :</li>'
 
 				for (j in tabCategories[i]) {
 					selectCategories += '<li style="margin-left:8px; font-size:13px;"><label style="all:unset; cursor: pointer;"><input id="' + j + '" type="checkbox" checked="true" onclick="onDisplayCheckBoxChanged(\'' + j.replace("'","\\'") + '\', \'' + i + '\');"> &nbsp' + j + '</label></li>'
 				}
-
-				selectCategories += '</div>'
 			}
+			$('#select-list')
+				.html(selectCategories)
+				.append('<li><span style="position:relative; width:25px; height:18px; display:inline-block; margin-left:2px;"><span style="position:absolute; display:inline-block; height:12.5px; width:100%; border-bottom: 2px solid #000000"></span></span> Délimitation des EPCI bretons</li>');
 
-			$('#select-list').html(selectCategories)
-			
+
+			// Ajout de toutes les catégories au menu de gauche
 			var selectCategories2 = ''
+			for (i in tabCategories2) {
+				selectCategories2 += '<li onclick="displayCategories(this)">&nbsp; Typologie d\'acteurs :</li><div>'
 
-		// Ajout de toutes les catégories au menu de gauche
-		for (i in tabCategories2){
-			selectCategories2 += '<li onclick="displayCategories(this)">&nbsp; Typologie d\'acteurs :</li><div>'
+				for (j in tabCategories2[i]) {
+					selectCategories2 += '<li style="margin-left:8px; font-size:13px;"> <img style="width:25px; height:25px;" src="image/'+categorieToPicto(j)+'.png">&nbsp' + j + '</li>'
+				}
 
-			for (j in tabCategories2[i]) {
-		selectCategories2 += '<li style="margin-left:8px; font-size:13px;"> <img style="width:25px; height:25px;" src="image/'+categorieToPicto(j)+'.png">&nbsp' + j + '</li>'
-	}
+				selectCategories2 += '</div>'
+			}
+			$('#select-list2').html(selectCategories2)
 
-	selectCategories2 += '</div>'
-}
-
-$('#select-list2').html(selectCategories2)	
-var selectListElt = $('#select-list');	// on récupère dans une variable l'élément correspondant à l'identifiant 'select-list' (attribué au menu de gauche)
-	selectListElt.html(selectListElt.html() + '<li><span style="position:relative; width:25px; height:18px; display:inline-block; margin-left:2px;"><span style="position:absolute; display:inline-block; height:12.5px; width:100%; border-bottom: 2px solid #000000"></span></span> Délimitation des EPCI bretons</li>');
-		
 			function resize() { // fonction qui redéfinit la taille de la carte et de la barre de titre
-	        	$('#mymap').css("height", ($(window).height() - $('.tab-bar').height()));
+				$('#mymap').css("height", ($(window).height() - $('.tab-bar').height()));
 				$('.tab-bar .middle').css("left", $('.left-small').width());
 				$('.tab-bar .middle').css("right", $('.right-small').width());
 				map.invalidateSize();
@@ -567,10 +539,11 @@ var selectListElt = $('#select-list');	// on récupère dans une variable l'él�
 			resize(); // appel de la fonction resize au chargement de l'application
 			map.fitBounds(perimetre_gip.getBounds()); // zoom automatique sur l'emprise du perimètre d'étude
 		
-		}//End initialize()
-		
+		} //End initialize()
+
 
 		//************* GESTION DU DEPLIAGE DES CATEGORIES ****************
+
 		function displayCategories(clickedEl) {
 			/* Toggle between hiding and showing the active panel */
 			var panel = clickedEl.nextElementSibling;
@@ -584,7 +557,7 @@ var selectListElt = $('#select-list');	// on récupère dans une variable l'él�
 
 		//******************FONCTIONNEMENT DU MENU GAUCHE : FILTRER LES CATEGORIES********************	
 
-		// Fonction de mise à jour de l'affichage des pictos, appelée dès qu'il se passe une action au niveau du menu de gauche
+		// Mise à jour de l'affichage des pictos, appelée dès qu'il se passe une action au niveau du menu de gauche
 		function majAffichage() {
 			map.removeLayer(markers); // on commence par retirer de la carte tous les markers
 			for (idLayer in poiLayers) { // Pour chaque identifiant (clé) du tableau des features (entités)
@@ -616,8 +589,8 @@ var selectListElt = $('#select-list');	// on récupère dans une variable l'él�
 			}
 			map.addLayer(markers); // on ajoute les markers mis à jour à la carte
 		}
-		
-		// Fonction qui récupère la catégorie correspondant à une sous catégorie donnée
+
+		// Récupère la catégorie correspondant à une sous catégorie donnée
 		function getCategorie(sousCategorie) {
 			for (i in tabCategories) { // pour chaque catégorie du tableau tabCategories
 				for (j in tabCategories[i]) { // pour toutes les sous-catégorie de cette catégorie
@@ -626,55 +599,53 @@ var selectListElt = $('#select-list');	// on récupère dans une variable l'él�
 				}
 			}
 		}
-	
 
-		// Fonction qui définit les catégories et sous catégories qui doivent être affichées ou non dès qu'une checkbox à été cliquée
+		// Définit les catégories et sous catégories qui doivent être affichées ou non dès qu'une checkbox à été cliquée
 		function onDisplayCheckBoxChanged(idChangedElement, parentCategoryId) {
 			tabCategories[parentCategoryId][idChangedElement] = document.getElementById(idChangedElement).checked; // on met à jour sa valeur dans tabCategories : true si la sous-catégorie vient d'être cochée, false sinon
 			
 			majAffichage(); // appelle de la fonction de mise à jour de l'affichage des données sur la carte
 		}
 
-
 		</script>
 	</head>
+
 	<body onload="initialize();">
 		<div class="off-canvas-wrap offcanvas-overlap" data-offcanvas style="width: 100%; z-index:1;"> 
 			<nav class="tab-bar">
 				<section class="left-small" id="menu_gauche"> <!-- bouton menu gauche -->
 					<a class="left-off-canvas-toggle"><img id="toggleButton" class="hide-for-small-only" src="image2//btn_filtrer_categories.png"><img class="show-for-small-only" src="image2/btn_filtrer_categories_icon.png"></a>
 				</section>
+				<div class="">
+					<h1 class="title mapTitle" >
+						<center><b>Acteurs de l'accompagnement et du financement de l'entrepreneuriat à impact en Bretagne</b></center>
+					</h1>
+				</div>
 			</nav>
 			<ol id="joyride_tour" style="z-index:90;" class="joyride-list" data-joyride>
 				<li data-id="left-panel" data-button="Fermer" data-options="tip_location:right; prev_button:false;">
 					<h6>Conseils</h6>
-					<p>Le menu gauche permet la sélection des différents élements. <br><br>Vous pouvez effectuer une recherche par acteur (ou par ville) en cliquant sur la loupe, et en tapant le nom recherché </p>
-					
+					<p>
+						Le menu gauche permet la sélection des différents élements.
+						<br><br>
+						Vous pouvez effectuer une recherche par acteur (ou par ville) en cliquant sur la loupe, et en tapant le nom recherché
+					</p>
 				</li>
 			</ol>
 			<div class="inner-wrap">
 				<!-- menu gauche -->
-				
 				<section id="left-panel" class="left-off-canvas-menu" style="background-color:rgba(89,79,84,0.8);">
-				<center><br><img src="image2/bdt.jpg" style="width:40%;"/></center><br>
-				<center><img src="image2//rb.jpg" style="width:30%;"/></center>
-				<ul class="off-canvas-list menu-checkbox" id="select-list2">
-				</ul>
-				  <ul class="off-canvas-list menu-checkbox" id="select-list">
-				  </ul>
-				
+					<center><br><img src="image2/bdt.jpg" style="width:40%;"/></center><br>
+					<center><img src="image2//rb.jpg" style="width:30%;"/></center>
+					<ul class="off-canvas-list menu-checkbox" id="select-list2"></ul>
+					<ul class="off-canvas-list menu-checkbox" id="select-list"></ul>		
 				</section>
 				<section class="main-section">
 					<div id="mymap" style="width:100%;"></div>
-					<div><h1 class="title mapTitle" ><font size = 4%><center><b>Acteurs de l'accompagnement et<br> du financement de l'entrepreneuriat <br> à impact en Bretagne</b></center></font></h1>
-
 				</section>
-
-				</div>
+			</div>
 		</div>
-		
-		
-		
+
 
 		<script src="script/modernizr.js"></script>
 		<script src="script/jquery.js"></script>
@@ -683,38 +654,33 @@ var selectListElt = $('#select-list');	// on récupère dans une variable l'él�
 		<script src="script/foundation.min.js"></script>
 		<script>
 			$(document).foundation({
-			  offcanvas : {
-				// Sets method in which offcanvas opens.
-				// [ move | overlap_single | overlap ]
-				open_method: 'overlap', 
-				// Should the menu close when a menu link is clicked?
-				// [ true | false ]
-				close_on_click : true
-			  },
-			  // définition des options pour les bulles d'aide
-			  joyride: {
-				pre_ride_callback: function() { // avant l'affichage des bulles d'aide, on ouvre les menus gauche et droit
-					$('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
+				offcanvas : {
+					// Sets method in which offcanvas opens.
+					// [ move | overlap_single | overlap ]
+					open_method: 'overlap', 
+					// Should the menu close when a menu link is clicked?
+					// [ true | false ]
+					close_on_click : true
 				},
-				post_ride_callback: function() { 
-					onRideEnded();
+				// définition des options pour les bulles d'aide
+				joyride: {
+					pre_ride_callback: function() { // avant l'affichage des bulles d'aide, on ouvre les menus gauche et droit
+						$('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
+					},
+					post_ride_callback: function() { 
+						onRideEnded();
+					}
 				}
-			  }
 			})
 
 			/*if(! $.cookie('gmf-joyride'))*/
 			$(document).foundation('joyride', 'start');
 
 			$(".joyride-close-tip").click(function() {
-			   onRideEnded();
+				onRideEnded();
 			});
 			$('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
 			$('#modal-help-accueil').foundation('reveal', 'open');
-
-
-			
-
-		
 
 		</script>
 	</body>
