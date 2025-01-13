@@ -104,11 +104,32 @@ ul.off-canvas-list {
 	height : 40px;
 }
 
+.filter-link {
+  display: inline-block;
+  color: inherit;
+}
+
+.filter-link:hover {
+  color: inherit;
+  background-color: #696970;
+}
+
+.filter-image {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.filter-text {
+  margin-right: 15px;
+}
+
 /* Diaporama */
 .rslides {
   list-style: none;
   overflow: hidden;
-  }
+}
 
 .rslides li {
   -webkit-backface-visibility: hidden;
@@ -117,13 +138,13 @@ ul.off-canvas-list {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  }
+}
 
 .rslides img {
   max-width: 300px !important;
   max-height: 250px;
   margin: auto;
-  }
+}
 
 
 .centered-btns_tabs,
@@ -131,7 +152,7 @@ ul.off-canvas-list {
 .large-btns_tabs {
   margin-top: 10px;
   text-align: center;
-  }
+}
 
 .centered-btns_tabs li,
 .transparent-btns_tabs li,
@@ -141,7 +162,7 @@ ul.off-canvas-list {
   _float: left;
   *float: left;
   margin-right: 5px;
-  }
+}
 
 .centered-btns_tabs a,
 .transparent-btns_tabs a,
@@ -161,11 +182,53 @@ ul.off-canvas-list {
   box-shadow: inset 0 0 2px 0 rgba(0,0,0,.3);
   width: 9px;
   height: 9px;
-  }
+}
 
 .centered-btns_here a,
 .transparent-btns_here a,
 .large-btns_here a {
   background: #222;
   background: rgba(0,0,0, .8);
-  }
+}
+
+
+/* Hide the default checkbox */
+.custom-checkbox {
+  display: none;
+}
+
+/* Style the label to look like a custom checkbox */
+.custom-label {
+  position: relative;
+  padding-left: 35px; /* Space for the custom checkbox */
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Custom checkbox */
+.custom-label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-radius: 4px; /* Rounded corners */
+  background-color: white;
+}
+
+/* Checked state styling */
+.custom-checkbox:checked + .custom-label::before {
+  background-color: #4CAF50; /* Green background when checked */
+  border-color: #4CAF50;
+}
+
+.custom-checkbox:checked + .custom-label::after {
+  content: "✔"; /* Add check mark when checked */
+  position: absolute;
+  left: 4px;
+  top: -2px;
+  color: white;
+  font-size: 16px;
+}

@@ -508,13 +508,16 @@
 					selectCategories += '<li ; onclick="displayCategories(this)">&nbsp; Porte un dispositif dédié aux :</li>'
 
 					for (j in tabCategories[i]) {
-						selectCategories += '<li style="margin-left:8px; font-size:13px;"><label style="all:unset; cursor: pointer;"><input id="' + j + '" type="checkbox" checked="true" onclick="onDisplayCheckBoxChanged(\'' + j.replace("'","\\'") + '\', \'' + i + '\');"> &nbsp' + j + '</label></li>'
+						selectCategories += 
+							'<li style="margin-left:8px; font-size:13px;">' +
+								'<input type="checkbox" id="' + j + '" class="custom-checkbox" checked="true" onclick="onDisplayCheckBoxChanged(\'' + j.replace("'","\\'") + '\', \'' + i + '\');">' +
+								'<label for="' + j + '" class="custom-label">' + j + '</label>' +
+							'</li>'
 					}
 				}
 				$('#select-list')
 					.html(selectCategories)
 					.append('<li><span style="position:relative; width:25px; height:18px; display:inline-block; margin-left:2px;"><span style="position:absolute; display:inline-block; height:12.5px; width:100%; border-bottom: 2px solid #000000"></span></span> Délimitation des EPCI bretons</li>');
-
 
 				// Ajout de toutes les catégories au menu de gauche
 				var selectCategories2 = ''
@@ -614,7 +617,13 @@
 		<div class="off-canvas-wrap offcanvas-overlap" data-offcanvas style="width: 100%; z-index:1;"> 
 			<nav class="tab-bar">
 				<section class="left-small" id="menu_gauche"> <!-- bouton menu gauche -->
-					<a class="left-off-canvas-toggle"><img id="toggleButton" class="hide-for-small-only" src="image2//btn_filtrer_categories.png"><img class="show-for-small-only" src="image2/btn_filtrer_categories_icon.png"></a>
+					<a class="left-off-canvas-toggle filter-link">
+						<span class="hide-for-small-only">
+							<img id="toggleButton" class="filter-image" src="image2//btn_filter_white.png">
+							<span class="filter-text">Filtres</span>
+						</span>
+						<img class="show-for-small-only" src="image2/btn_filtrer_categories_icon.png">
+					</a>
 				</section>
 				<div class="">
 					<h1 class="title mapTitle" >
@@ -633,19 +642,19 @@
 				</li>
 			</ol>
 			<div class="inner-wrap">
-				<!-- menu gauche -->
+				<!-- Menu gauche -->
 				<section id="left-panel" class="left-off-canvas-menu" style="background-color:rgba(89,79,84,0.8);">
 					<center><br><img src="image2/bdt.jpg" style="width:40%;"/></center><br>
 					<center><img src="image2//rb.jpg" style="width:30%;"/></center>
 					<ul class="off-canvas-list menu-checkbox" id="select-list2"></ul>
-					<ul class="off-canvas-list menu-checkbox" id="select-list"></ul>		
+					<ul class="off-canvas-list menu-checkbox" id="select-list"></ul>
 				</section>
+				<!-- Carte -->
 				<section class="main-section">
 					<div id="mymap" style="width:100%;"></div>
 				</section>
 			</div>
 		</div>
-
 
 		<script src="script/modernizr.js"></script>
 		<script src="script/jquery.js"></script>
