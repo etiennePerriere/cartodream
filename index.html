@@ -64,18 +64,6 @@
 		<script type="text:javascript" src="donnes/popup.js"></script>
 		<script type="text/javascript" src="donnees/sentiers_PDIPR.js"></script>
 
-		<style>
-			body,
-			.title {
-				color: black;
-				font-family: 'Roboto', sans-serif;
-				font-weight: 100px;
-			}
-
-			.mapTitle {
-				margin-left: 20%;
-			}
-		</style>
 		
 		<script>
 			popupOptions = {minWidth:350, maxWidth:350, maxHeight:400, closeButton:true}; //on défini la largeur max des popups à 400 pixels
@@ -509,7 +497,7 @@
 
 					for (j in tabCategories[i]) {
 						selectCategories += 
-							'<li style="margin-left:8px; font-size:13px;">' +
+							'<li style="margin:5px 4px; font-size:13px;">' +
 								'<input type="checkbox" id="' + j + '" class="custom-checkbox" checked="true" onclick="onDisplayCheckBoxChanged(\'' + j.replace("'","\\'") + '\', \'' + i + '\');">' +
 								'<label for="' + j + '" class="custom-label">' + j + '</label>' +
 							'</li>'
@@ -517,7 +505,7 @@
 				}
 				$('#select-list')
 					.html(selectCategories)
-					.append('<li><span style="position:relative; width:25px; height:18px; display:inline-block; margin-left:2px;"><span style="position:absolute; display:inline-block; height:12.5px; width:100%; border-bottom: 2px solid #000000"></span></span> Délimitation des EPCI bretons</li>');
+					.append('<li style="margin-top:20px"><span style="position:relative; width:25px; height:18px; display:inline-block; margin-left:2px;"><span style="position:absolute; display:inline-block; height:12.5px; width:100%; border-bottom: 2px solid #000000"></span></span> Délimitation des EPCI bretons</li>');
 
 				// Ajout de toutes les catégories au menu de gauche
 				var selectCategories2 = ''
@@ -620,32 +608,23 @@
 					<a class="left-off-canvas-toggle filter-link">
 						<span class="hide-for-small-only">
 							<img id="toggleButton" class="filter-image" src="image2//btn_filter_white.png">
-							<span class="filter-text">Filtres</span>
+							<span id="filter_title"><!-- ### custom-script var filled ### --></span>
 						</span>
-						<img class="show-for-small-only" src="image2/btn_filtrer_categories_icon.png">
+						<img class="show-for-small-only filter-image" src="image2/btn_filter_white.png">
 					</a>
 				</section>
-				<div class="">
-					<h1 class="title mapTitle" >
-						<center><b>Acteurs de l'accompagnement et du financement de l'entrepreneuriat à impact en Bretagne</b></center>
-					</h1>
-				</div>
+				<h1 id="map_title"><!-- ### custom-script var filled ### --></h1>
 			</nav>
 			<ol id="joyride_tour" style="z-index:90;" class="joyride-list" data-joyride>
 				<li data-id="left-panel" data-button="Fermer" data-options="tip_location:right; prev_button:false;">
-					<h6>Conseils</h6>
-					<p>
-						Le menu gauche permet la sélection des différents élements.
-						<br><br>
-						Vous pouvez effectuer une recherche par acteur (ou par ville) en cliquant sur la loupe, et en tapant le nom recherché
-					</p>
+					<h6 id="hint_title"><!-- ### custom-script var filled ### --></h6>
+					<p id="hint_content"><!-- ### custom-script var filled ### --></p>
 				</li>
 			</ol>
 			<div class="inner-wrap">
 				<!-- Menu gauche -->
 				<section id="left-panel" class="left-off-canvas-menu" style="background-color:rgba(89,79,84,0.8);">
-					<center><br><img src="image2/bdt.jpg" style="width:40%;"/></center><br>
-					<center><img src="image2//rb.jpg" style="width:30%;"/></center>
+					<div id="sponsors"><!-- ### custom-script var filled ### --></div>
 					<ul class="off-canvas-list menu-checkbox" id="select-list2"></ul>
 					<ul class="off-canvas-list menu-checkbox" id="select-list"></ul>
 				</section>
@@ -661,6 +640,7 @@
 		<script src="script/responsiveslides.min.js"></script>
 		<!--<script src="js/foundation/vendor/jquery.cookie.js"></script>-->
 		<script src="script/foundation.min.js"></script>
+		<script src="script/custom-script.js"></script>
 		<script>
 			$(document).foundation({
 				offcanvas : {
