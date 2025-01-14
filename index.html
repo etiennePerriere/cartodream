@@ -602,6 +602,41 @@
 	</head>
 
 	<body onload="initialize();">
+		<header>
+			<!-- TITLE AND SPONSORS -->
+			<section class="top-title">
+				<div class="grid-x align-middle show-for-medium">
+					<div class="cell medium-3 large-2 text-center">
+						<img src="image2/bdt.jpg" class="sponsor-logo">
+					</div>
+					<div class="cell medium-6 large-8 text-center">
+						<h1 data-js-fill-id="map_title" class="medium-h1"></h1>
+					</div>
+					<div class="cell medium-3 large-2 text-center">
+						<img src="image2/rb.jpg" class="sponsor-logo">
+					</div>
+				</div>
+
+				<div class="grid-x align-middle show-for-small-only">
+					<div class="cell text-center">
+						<h1 data-js-fill-id="map_title"></h1>
+					</div>
+					<div class="cell small-6 text-center">
+						<img src="image2/bdt_small.jpg" class="sponsor-logo">
+					</div>
+					<div class="cell small-6 text-center">
+						<img src="image2/rb.jpg" class="sponsor-logo">
+					</div>
+				</div>
+			</section>
+
+			<!-- FILTERS -->
+			<div class="grid-x">
+				
+
+			</div>
+		</header>
+
 		<div class="off-canvas-wrap offcanvas-overlap" data-offcanvas style="width: 100%; z-index:1;"> 
 			<nav class="tab-bar">
 				<section class="left-small" id="menu_gauche"> <!-- bouton menu gauche -->
@@ -628,6 +663,7 @@
 					<ul class="off-canvas-list menu-checkbox" id="select-list2"></ul>
 					<ul class="off-canvas-list menu-checkbox" id="select-list"></ul>
 				</section>
+
 				<!-- Carte -->
 				<section class="main-section">
 					<div id="mymap" style="width:100%;"></div>
@@ -640,37 +676,6 @@
 		<script src="script/responsiveslides.min.js"></script>
 		<!--<script src="js/foundation/vendor/jquery.cookie.js"></script>-->
 		<script src="script/foundation.min.js"></script>
-		<script src="script/custom-script.js"></script>
-		<script>
-			$(document).foundation({
-				offcanvas : {
-					// Sets method in which offcanvas opens.
-					// [ move | overlap_single | overlap ]
-					open_method: 'overlap', 
-					// Should the menu close when a menu link is clicked?
-					// [ true | false ]
-					close_on_click : true
-				},
-				// définition des options pour les bulles d'aide
-				joyride: {
-					pre_ride_callback: function() { // avant l'affichage des bulles d'aide, on ouvre les menus gauche et droit
-						$('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
-					},
-					post_ride_callback: function() { 
-						onRideEnded();
-					}
-				}
-			})
-
-			/*if(! $.cookie('gmf-joyride'))*/
-			$(document).foundation('joyride', 'start');
-
-			$(".joyride-close-tip").click(function() {
-				onRideEnded();
-			});
-			$('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
-			$('#modal-help-accueil').foundation('reveal', 'open');
-
-		</script>
+		<script src="script/app.js"></script>
 	</body>
 </html>

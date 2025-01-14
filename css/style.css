@@ -246,3 +246,31 @@ ul.off-canvas-list li label.custom-label {
   color: white;
   font-size: 16px;
 }
+
+
+
+body {
+  color: white;
+}
+
+.top-title {
+  border-bottom: 1px solid #ccc;
+  background-color: #696970;
+}
+
+h1 {
+  font-size: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.medium-h1 {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+.sponsor-logo {
+  width: auto;
+  max-height: 70px;
+  margin: 12px 0;
+}

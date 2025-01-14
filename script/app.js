@@ -19,9 +19,11 @@ const sponsors = [
 
 // FUNCTIONS
 function updateTitle() {
-    const titleElement = document.getElementById('map_title');
-    if (titleElement) {
-        titleElement.textContent = title;
+    const titleElements = document.querySelectorAll('[data-js-fill-id="map_title"]');
+    if (titleElements) {
+        titleElements.forEach(element => {
+            element.textContent = title;
+        });
     }
 }
 
@@ -73,3 +75,33 @@ updateHintTitle();
 updateHintContent();
 updateFilterTitle();
 updateSponsors();
+
+
+$(document).foundation({
+    offcanvas : {
+        // Sets method in which offcanvas opens.
+        // [ move | overlap_single | overlap ]
+        open_method: 'overlap', 
+        // Should the menu close when a menu link is clicked?
+        // [ true | false ]
+        close_on_click : true
+    },
+    // définition des options pour les bulles d'aide
+    joyride: {
+        pre_ride_callback: function() { // avant l'affichage des bulles d'aide, on ouvre les menus gauche et droit
+            $('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
+        },
+        post_ride_callback: function() { 
+            onRideEnded();
+        }
+    }
+})
+
+/*if(! $.cookie('gmf-joyride'))*/
+$(document).foundation('joyride', 'start');
+
+$(".joyride-close-tip").click(function() {
+    onRideEnded();
+});
+$('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
+$('#modal-help-accueil').foundation('reveal', 'open');
