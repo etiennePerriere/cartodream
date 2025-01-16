@@ -249,13 +249,11 @@ ul.off-canvas-list li label.custom-label {
 
 
 
-body {
-  color: white;
-}
 
 .top-title {
   border-bottom: 1px solid #ccc;
   background-color: #696970;
+  color: white;
 }
 
 h1 {
@@ -273,4 +271,13 @@ h1 {
   width: auto;
   max-height: 70px;
   margin: 12px 0;
+}
+
+.filters {
+  border-bottom: 1px solid #ccc;
+  padding: 15px;
+}
+
+.filters .input-group {
+  margin: 0;
 }

@@ -105,3 +105,4 @@ $(".joyride-close-tip").click(function() {
 });
 $('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
 $('#modal-help-accueil').foundation('reveal', 'open');
+
