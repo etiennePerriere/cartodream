@@ -1,0 +1,9 @@
+/* Base styles */
+@import 'base/variables.css';
+@import 'base/typography.css';
+
+/* Components */
+@import 'components/header.css';
+@import 'components/filters.css';
+@import 'components/map.css';
+@import 'components/popups.css';

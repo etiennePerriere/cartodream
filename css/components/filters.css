@@ -1,0 +1,73 @@
+.filters {
+    background-color: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 15px;
+}
+
+.filters .input-group {
+    margin: 0;
+}
+
+/* Custom checkbox styles */
+.custom-checkbox {
+    display: none;
+}
+
+.custom-label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.custom-label::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: -3px;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    border: 2px solid var(--text-color);
+    border-radius: 4px;
+    background-color: var(--white);
+}
+
+.custom-checkbox:checked + .custom-label::before {
+    background-color: var(--checkbox-check-color);
+    border-color: var(--checkbox-check-color);
+}
+
+.custom-checkbox:checked + .custom-label::after {
+    content: "✔";
+    position: absolute;
+    left: 11px;
+    top: -5px;
+    color: var(--white);
+    font-size: var(--font-size-normal);
+}
+
+/* Mobile Filter Menu */
+#filter-offcanvas {
+    background-color: var(--overlay-bg);
+    color: var(--white);
+    padding: 1rem;
+    height: 100%;
+}
+
+#filter-offcanvas .close-button {
+    color: var(--white);
+    font-size: 2rem;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.filter-button {
+    margin: 0;
+    padding: 0.5rem 1rem;
+}
+
+.mobile-controls {
+    padding: 0.5rem;
+    background-color: var(--secondary-color);
+    border-bottom: 1px solid var(--border-color);
+}

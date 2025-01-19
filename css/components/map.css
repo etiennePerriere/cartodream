@@ -1,0 +1,28 @@
+#mymap {
+    width: 100%;
+    height: calc(100vh - var(--header-height-large));
+}
+
+@media screen and (max-width: 63.9375em) {
+    #mymap {
+        height: calc(100vh - var(--header-height-small));
+    }
+}
+
+/* Ensure off-canvas menu doesn't affect large screen layout */
+@media screen and (min-width: 64em) {
+    .off-canvas-content {
+        margin-top: 0 !important;
+    }
+}
+
+/* Map Controls */
+.leaflet-control-zoom {
+    border: none;
+    box-shadow: var(--popup-shadow);
+}
+
+.leaflet-touch .leaflet-control-layers {
+    border: none;
+    box-shadow: var(--popup-shadow);
+}

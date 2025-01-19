@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title> Carte interactive </title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!--[if lte IE 8]>
+			<script>alert("Your web browser does not work well with this application. Please upgrade it or choose another browser.");</script>
+		<![endif]-->
+		
+		<link rel="stylesheet" href="css/fontawesome/css/fontawesome.min.css">
+		<link href="css/fontawesome/css/brands.min.css" rel="stylesheet" />
+		<link href="css/fontawesome/css/solid.min.css" rel="stylesheet" />
+		<link href="css/fontawesome/css/regular.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/foundation.min.css">
+		<link rel="stylesheet" href="dist/css/lightbox.min.css">
+		<link rel="stylesheet" href="css/normalize.css">
+		<!-- https://unpkg.com/leaflet@0.7.3/dist/leaflet.css -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+		<!-- https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.css -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+		<!-- https://unpkg.com/leaflet.markercluster@1.0.0/dist/MarkerCluster.Default.css -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+		<link rel="stylesheet" href="css/style.css">
+		<!-- Installation Plugin Leaflet Draw CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw-src.css">
+		
+		
+		<!-- https://unpkg.com/leaflet@0.7.3/dist/leaflet-src.js -->
+		<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet-src.js"></script>
+		<!-- https://unpkg.com/leaflet.markercluster@1.0.0/dist/leaflet.markercluster-src.js -->
+		<script src="script/leaflet.markercluster-src.js"></script>
+		<!-- Installation Plugin Leaflet Draw JS -->
+		<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw-src.js"></script>
+
+		<!-- Installation Easy Button -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+		<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+		<script src="dist/js/lightbox-plus-jquery.min.js"></script>
+		<!-- Fuzzysearch : https://github.com/stefanocudini/leaflet-search -->
+		<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet-search@2.9.8/dist/leaflet-search.src.css"> -->
+		<!-- https://unpkg.com/leaflet-search@2.9.8/dist/leaflet-search.src.css -->
+		<!-- <script src="https://unpkg.com/leaflet-search@2.9.8/dist/leaflet-search.src.js"></script> -->
+		<!-- https://unpkg.com/leaflet-search@2.9.8/dist/leaflet-search.src.js -->
+
+		<!-- JSDELIVR : https://github.com/jsdelivr/jsdelivr#usage -->
+			<!-- https://github.com/jsdelivr/jsdelivr#github -->
+
+		<!-- Chargement de Leaflet-FuseSearch -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/1.2.2/fuse.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/naomap/leaflet-fusesearch@1e356c69b2b77e76b8931ded3efe27992ea47a0c/src/leaflet.fusesearch.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/naomap/leaflet-fusesearch@1e356c69b2b77e76b8931ded3efe27992ea47a0c/src/leaflet.fusesearch.css">
+
+		<!-- on rajoute la librairie Leaflet Fuse Search car Leaflet Search n'a pas la fonction de recherche voulue -->
+
+		<!--on laisse celui la pour l'instant -->
+
+		<script type="text/javascript" src="donnees/AA.js"></script>
+		<script type="text/javascript" src="donnees/circuits_vtt.js"></script>
+		<script type="text/javascript" src="donnees/AOA.js"></script>
+		<script type="text/javascript" src="donnees/Coeur.js"></script>
+		<script type="text/javascript" src="donnees/communes.js"></script>
+		<script type="text/javascript" src="donnees/POI.js"></script>
+		<script type="text/javascript" src="donnees/batiments.js"></script>
+		<script type="text:javascript" src="donnes/popup.js"></script>
+		<script type="text/javascript" src="donnees/sentiers_PDIPR.js"></script>
+		<script type="module" src="script/app-preload.js"></script>
+	</head>
+
+	<body onload="initialize();">
+		<header>
+			<!-- TITLE AND SPONSORS -->
+			<section class="top-title">
+				<div class="grid-x align-middle show-for-medium">
+					<div class="cell medium-3 large-2 text-center">
+						<img src="image2/bdt.jpg" class="sponsor-logo">
+					</div>
+					<div class="cell medium-6 large-8 text-center">
+						<h1 data-js-fill-id="map_title" class="medium-h1"></h1>
+					</div>
+					<div class="cell medium-3 large-2 text-center">
+						<img src="image2/rb.jpg" class="sponsor-logo">
+					</div>
+				</div>
+
+				<div class="grid-x align-middle show-for-small-only">
+					<div class="cell text-center">
+						<h1 data-js-fill-id="map_title"></h1>
+					</div>
+					<div class="cell small-6 text-center">
+						<img src="image2/bdt_small.jpg" class="sponsor-logo">
+					</div>
+					<div class="cell small-6 text-center">
+						<img src="image2/rb.jpg" class="sponsor-logo">
+					</div>
+				</div>
+			</section>
+
+			<!-- FILTERS -->
+			 <section class="filters">
+				<div class="grid-x">
+					<div class="cell large-4 text-center">
+						<div class="grid-x">
+							<div class="cell">
+								Porte un dispositif dédié aux
+							</div>
+						</div>
+						<div id="select-list" class="grid-x">
+						</div>
+					</div>
+					<div class="cell large-4 text-center">
+						<div class="grid-x">
+							<div class="cell">
+								Typologie d'acteurs
+							</div>
+						</div>
+						<div id="select-list2" class="grid-x">
+						</div>
+					</div>
+					<div class="cell large-2">
+						<div class="grid-x">
+							<div class="cell">
+								Délimitation des EPCI Bretons
+							</div>
+							<div class="cell">
+								<i class="fa-regular fa-window-minimize"></i>
+							</div>
+						</div>
+					</div>
+					<div class="cell large-2 text-center">
+						<div class="input-group">
+							<input class="input-group-field" type="text" placeholder="Rechercher">
+							<div class="input-group-button">
+								<button type="submit" class="button" >
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			 </section>
+		</header>
+
+		<div class="off-canvas-wrap offcanvas-overlap" data-offcanvas style="width: 100%; z-index:1;"> 
+			<nav class="tab-bar">
+				<section class="left-small" id="menu_gauche"> <!-- bouton menu gauche -->
+					<a class="left-off-canvas-toggle filter-link">
+						<span class="hide-for-small-only">
+							<img id="toggleButton" class="filter-image" src="image2//btn_filter_white.png">
+						</span>
+						<img class="show-for-small-only filter-image" src="image2/btn_filter_white.png">
+					</a>
+				</section>
+				<h1 id="map_title"><!-- ### custom-script var filled ### --></h1>
+			</nav>
+
+			<ol id="joyride_tour" style="z-index:90;" class="joyride-list" data-joyride>
+				<li data-id="left-panel" data-button="Fermer" data-options="tip_location:right; prev_button:false;">
+					<h6 id="hint_title"><!-- ### custom-script var filled ### --></h6>
+					<p id="hint_content"><!-- ### custom-script var filled ### --></p>
+				</li>
+			</ol>
+			
+			<div class="inner-wrap">
+				<!-- Menu gauche -->
+				<section id="left-panel" class="left-off-canvas-menu" style="background-color:rgba(89,79,84,0.8);">
+				</section>
+
+				<!-- Carte -->
+				<section class="main-section">
+					<div id="mymap" style="width:100%;"></div>
+				</section>
+			</div>
+		</div>
+
+		<script src="script/modernizr.js"></script>
+		<script src="script/jquery.js"></script>
+		<script src="script/responsiveslides.min.js"></script>
+		<!--<script src="js/foundation/vendor/jquery.cookie.js"></script>-->
+		<script src="script/foundation.min.js"></script>
+		<script src="script/app-postload.js"></script>
+	</body>
+</html>

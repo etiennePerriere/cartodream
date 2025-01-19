@@ -1,21 +1,43 @@
 // CUSTOMIZED CONSTANTS
 const title = "Acteurs de l'accompagnement et du financement de l'entrepreneuriat à impact en Bretagne"
-const filter_title = "Filtres et légende"
 const hint_title = "Conseils"
 const hint_content = "Le menu gauche permet la sélection des différents élements." +
                     "<br><br>" +
                     "Vous pouvez effectuer une recherche par acteur (ou par ville) en cliquant sur la loupe, et en tapant le nom recherché"
-const sponsors = [
-    {
-        src: "image2/bdt.jpg",
-        width: "40%"
-    },
-    {
-        src: "image2//rb.jpg",
-        width: "30%"
-    }
-]
 
+// Call our update functions first
+updateTitle();
+updateHintTitle();
+updateHintContent();
+
+// Initialize Foundation
+$(document).foundation();
+
+// Initialize off-canvas functionality
+$(document).ready(function() {
+    new Foundation.OffCanvas($('#filter-offcanvas'));
+
+    // Handle search input
+    $('.input-group-field').on('input', function() {
+        const searchValue = $(this).val().toLowerCase();
+        // Use the existing FuseSearch functionality
+        searchCtrl.searchFeatures(searchValue);
+    });
+
+    // Handle map resize when off-canvas is opened/closed
+    $('#filter-offcanvas').on('opened.zf.offCanvas', function() {
+        if (typeof map !== 'undefined') {
+            setTimeout(() => map.invalidateSize(), 300);
+        }
+    }).on('closed.zf.offCanvas', function() {
+        if (typeof map !== 'undefined') {
+            setTimeout(() => map.invalidateSize(), 300);
+        }
+    });
+
+    // Sync filters after DOM is loaded
+    syncFilters();
+});
 
 // FUNCTIONS
 function updateTitle() {
@@ -41,68 +63,34 @@ function updateHintContent() {
     }
 }
 
-function updateFilterTitle() {
-    const filterTitleElement = document.getElementById('filter_title');
-    if (filterTitleElement) {
-        filterTitleElement.textContent = filter_title;
+// Function to sync filter selections between desktop and mobile
+function syncFilters() {
+    // Sync first filter group
+    const desktopList = document.getElementById('select-list');
+    const mobileList = document.getElementById('select-list-mobile');
+    if (desktopList && mobileList) {
+        mobileList.innerHTML = desktopList.innerHTML;
     }
-}
 
-function updateSponsors() {
-    const sponsorElement = document.getElementById('sponsors');
+    // Sync second filter group
+    const desktopList2 = document.getElementById('select-list2');
+    const mobileList2 = document.getElementById('select-list2-mobile');
+    if (desktopList2 && mobileList2) {
+        mobileList2.innerHTML = desktopList2.innerHTML;
+    }
 
-    if (sponsorElement) {
-        sponsors.forEach(sponsor => {
-            const img = document.createElement('img');
-            // Loop through the object properties and dynamically set attributes
-            for (let attribute in sponsor) {
-              if (sponsor.hasOwnProperty(attribute)) {
-                img.setAttribute(attribute, sponsor[attribute]);
-              }
-            }
-      
-            const centerTag = document.createElement('span');
-            centerTag.appendChild(img);
-            sponsorElement.appendChild(centerTag);
+    // Add event listeners to keep checkboxes in sync
+    document.querySelectorAll('.custom-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const correspondingId = this.id;
+            const otherCheckboxes = document.querySelectorAll(`input[id="${correspondingId}"]`);
+            otherCheckboxes.forEach(otherCheckbox => {
+                if (otherCheckbox !== this) {
+                    otherCheckbox.checked = this.checked;
+                }
+            });
+            // Trigger the existing display update function
+            onDisplayCheckBoxChanged(this.id, getCategorie(this.id));
         });
-    }
+    });
 }
-
-
-// CALLS
-updateTitle();
-updateHintTitle();
-updateHintContent();
-updateFilterTitle();
-updateSponsors();
-
-
-$(document).foundation({
-    offcanvas : {
-        // Sets method in which offcanvas opens.
-        // [ move | overlap_single | overlap ]
-        open_method: 'overlap', 
-        // Should the menu close when a menu link is clicked?
-        // [ true | false ]
-        close_on_click : true
-    },
-    // définition des options pour les bulles d'aide
-    joyride: {
-        pre_ride_callback: function() { // avant l'affichage des bulles d'aide, on ouvre les menus gauche et droit
-            $('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
-        },
-        post_ride_callback: function() { 
-            onRideEnded();
-        }
-    }
-})
-
-/*if(! $.cookie('gmf-joyride'))*/
-$(document).foundation('joyride', 'start');
-
-$(".joyride-close-tip").click(function() {
-    onRideEnded();
-});
-$('.off-canvas-wrap').foundation('offcanvas', 'show', 'offcanvas-overlap');
-$('#modal-help-accueil').foundation('reveal', 'open');
-

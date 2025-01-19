@@ -1,0 +1,29 @@
+:root {
+    /* Layout */
+    --header-height-large: 180px;
+    --header-height-small: 70px;
+    --top-title-height: 94px;
+
+    /* Colors */
+    --primary-color: #696970;
+    --secondary-color: #f5f5f5;
+    --border-color: #ccc;
+    --text-color: #333;
+    --white: #fff;
+    
+    /* Overlay colors */
+    --overlay-bg: rgba(89, 79, 84, 0.95);
+    
+    /* Component specific */
+    --checkbox-size: 20px;
+    --checkbox-check-color: #4CAF50;
+    
+    /* Shadows */
+    --popup-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    
+    /* Font sizes */
+    --font-size-small: 0.875rem;
+    --font-size-normal: 1rem;
+    --font-size-large: 1.2rem;
+    --font-size-xlarge: 1.5rem;
+}

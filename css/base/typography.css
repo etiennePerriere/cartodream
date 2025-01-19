@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: var(--font-size-xlarge);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+h3 {
+    font-size: var(--font-size-large);
+    margin-bottom: 1.5rem;
+}
+
+h4 {
+    font-size: var(--font-size-normal);
+    margin: 1rem 0;
+}
+
+@media screen and (max-width: 63.9375em) {
+    h1 {
+        font-size: var(--font-size-large);
+        margin: 0;
+    }
+}

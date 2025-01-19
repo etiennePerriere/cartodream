@@ -1,0 +1,26 @@
+.top-title {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sponsor-logo {
+    width: auto;
+    max-height: 70px;
+    margin: 12px 0;
+}
+
+.medium-h1 {
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+}
+
+@media screen and (max-width: 63.9375em) {
+    .top-title {
+        padding: 0.5rem;
+    }
+
+    .sponsor-logo {
+        max-height: 50px;
+    }
+}
