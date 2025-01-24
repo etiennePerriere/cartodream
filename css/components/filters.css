@@ -46,6 +46,88 @@
     font-size: var(--font-size-normal);
 }
 
+/* ACTOR TYPE FILTERS */
+/* Hide actual checkbox but keep it accessible */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Actor Type Filters */
+.actor-type-filter {
+    cursor: pointer;
+    display: block; /* Labels are inline by default */
+}
+
+.actor-type-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    transform-origin: left center;
+    transition: all 0.3s ease;
+}
+
+.actor-type-filter img {
+    width: 25px;
+    height: 25px;
+    transition: all 0.3s ease;
+}
+
+.actor-type-filter span {
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Checked state and hover */
+.actor-type-filter input:checked ~ .actor-type-content {
+    transform: scale(1);
+}
+
+.actor-type-filter input:checked ~ .actor-type-content:hover {
+    transform: scale(1.05);
+}
+
+.actor-type-filter input:checked ~ .actor-type-content img,
+.actor-type-filter input:checked ~ .actor-type-content span {
+    opacity: 1;
+}
+
+/* Unchecked state */
+.actor-type-filter input:not(:checked) ~ .actor-type-content {
+    transform: scale(0.95);
+}
+
+.actor-type-filter input:not(:checked) ~ .actor-type-content img,
+.actor-type-filter input:not(:checked) ~ .actor-type-content span {
+    opacity: 0.5;
+}
+
+/* Focus styles for keyboard navigation */
+.actor-type-filter input:focus-visible ~ .actor-type-content {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Mobile styles */
+.off-canvas .actor-type-filter {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-small);
+}
+
+.off-canvas .actor-type-filter span {
+    color: var(--white);
+}
+/* END ACTOR TYPE FILTERS */
+
 /* Mobile Filter Menu */
 #filter-offcanvas {
     background-color: var(--overlay-bg);

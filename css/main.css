@@ -1,9 +1,12 @@
-/* Base styles */
+/* Base Styles */
 @import 'base/variables.css';
-@import 'base/typography.css';
+@import 'base/layout.css';
 
-/* Components */
-@import 'components/header.css';
+/* Component Styles */
 @import 'components/filters.css';
+@import 'components/header.css';
 @import 'components/map.css';
+@import 'components/mobile-controls.css';
+@import 'components/modal.css';
 @import 'components/popups.css';
+@import 'components/search.css';

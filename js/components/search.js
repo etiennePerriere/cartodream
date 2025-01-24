@@ -1,52 +1,107 @@
-// Custom FuseSearch extension
-L.Control.CustomFuseSearch = L.Control.FuseSearch.extend({
-    createResultItem: function(props, container, popup) {
-        var _this = this;
-        var feature = props._feature;
-        var resultItem = L.DomUtil.create('p', 'result-item', container);
-
-        if (undefined !== popup) {
-            L.DomUtil.addClass(resultItem, 'clickable');
-            resultItem.onclick = function() {
-                if (window.matchMedia("(max-width:480px)").matches) {
-                    _this.hidePanel();
-                    feature.layer.openPopup();
-                } else {
-                    _this._panAndPopup(feature, popup);
-                }
-            };
-        } else {
-            L.DomUtil.addClass(resultItem, 'clickable');
-            resultItem.onclick = function() {
-                var longitude = feature.geometry.coordinates[0];
-                var latitude = feature.geometry.coordinates[1];
-                map.flyTo([latitude, longitude], 16);
-            };
-        }
-
-        if (null !== this.options.showResultFct) {
-            this.options.showResultFct(feature, resultItem);
-        } else {
-            str = '<b>' + props[this._keys[0]] + '</b>';
-            for (var i = 1; i < this._keys.length; i++) {
-                str += '<br/>' + props[this._keys[i]];
-            }
-            resultItem.innerHTML = str;
-        }
-
-        return resultItem;
-    }
-});
-
 var SearchComponent = {
     initialize: function() {
         this.setupSearch();
+        this.setupSearchListeners();
+        this.setupClickOutside();
     },
 
     setupSearch: function() {
-        var searchCtrl = new L.Control.CustomFuseSearch();
-        searchCtrl.addTo(map);
-        searchCtrl.indexFeatures(poi, ["nom", "ville"]);
+        var options = {
+            keys: ["properties.nom", "properties.ville"],
+            threshold: 0.3,
+            includeMatches: true
+        };
+        this.fuse = new Fuse(poi.features, options);
+    },
+
+    setupSearchListeners: function() {
+        var self = this;
+        var searchContainers = document.querySelectorAll('.search-container');
+        
+        searchContainers.forEach(function(container) {
+            var input = container.querySelector('.input-group-field');
+            var resultsContainer = container.querySelector('.search-results');
+            
+            input.addEventListener('input', function(e) {
+                var searchValue = e.target.value;
+                if (searchValue.length > 2) {
+                    var results = self.fuse.search(searchValue);
+                    self.showResults(results, resultsContainer);
+                } else {
+                    self.hideResults(resultsContainer);
+                }
+            });
+
+            // Prevent search results from closing when clicking inside
+            resultsContainer.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    },
+
+    setupClickOutside: function() {
+        // Hide results when clicking outside
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.search-results').forEach(function(container) {
+                this.hideResults(container);
+            }.bind(this));
+        }.bind(this));
+    },
+
+    showResults: function(results, container) {
+        if (!results.length) {
+            this.hideResults(container);
+            return;
+        }
+
+        var html = '';
+        results.forEach(function(result) {
+            html += '<div class="search-result-item" ' +
+                   'data-lat="' + result.geometry.coordinates[1] + '" ' +
+                   'data-lng="' + result.geometry.coordinates[0] + '" ' +
+                   'data-id="' + result.properties.id + '">' +
+                   '<b>' + result.properties.nom + '</b>';
+            
+            if (result.properties.ville) {
+                html += '<small>' + result.properties.ville + '</small>';
+            }
+            
+            html += '</div>';
+        });
+
+        container.innerHTML = html;
+        container.classList.add('active');
+
+        // Add click handlers to results
+        container.querySelectorAll('.search-result-item').forEach(function(item) {
+            item.addEventListener('click', this.handleResultClick.bind(this));
+        }.bind(this));
+    },
+
+    hideResults: function(container) {
+        container.classList.remove('active');
+        container.innerHTML = '';
+    },
+
+    handleResultClick: function(e) {
+        var item = e.currentTarget;
+        var lat = parseFloat(item.getAttribute('data-lat'));
+        var lng = parseFloat(item.getAttribute('data-lng'));
+        var id = item.getAttribute('data-id');
+
+        // Fly to location
+        map.flyTo([lat, lng], 16);
+
+        // Find and open the corresponding marker's popup
+        if (FilterComponent.poiLayers[id] && FilterComponent.poiLayers[id].marker) {
+            FilterComponent.poiLayers[id].marker.openPopup();
+        }
+
+        // Hide results
+        this.hideResults(item.parentElement);
+
+        // Clear input
+        item.closest('.search-container').querySelector('input').value = '';
     }
 };
 

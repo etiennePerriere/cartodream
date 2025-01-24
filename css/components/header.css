@@ -1,26 +1,71 @@
+/* Title Section */
 .top-title {
     background-color: var(--primary-color);
     color: var(--white);
-    border-bottom: 1px solid var(--border-color);
+    padding: var(--spacing-medium);
 }
 
-.sponsor-logo {
-    width: auto;
-    max-height: 70px;
-    margin: 12px 0;
+.top-title h1 {
+    margin: 0;
+    font-size: var(--font-size-xlarge);
 }
 
 .medium-h1 {
-    border-left: 1px solid var(--border-color);
-    border-right: 1px solid var(--border-color);
+    border-left: var(--border-standard);
+    border-right: var(--border-standard);
+    padding: var(--spacing-medium);
 }
 
+.sponsor-logo {
+    max-height: var(--sponsor-logo-height-desktop);
+    width: auto;
+    margin: var(--spacing-small) 0;
+}
+
+/* Filter Section */
+.filters {
+    background-color: var(--secondary-color);
+    border-bottom: var(--border-standard);
+    padding: var(--spacing-medium);
+}
+
+.filters h2 {
+    font-size: var(--font-size-base);
+    margin: 0 0 var(--spacing-small) 0;
+}
+
+/* Search Input */
+.input-group {
+    margin-bottom: 0;
+}
+
+.input-group-field {
+    height: 2.4rem;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.input-group-button .button {
+    height: 2.4rem;
+    padding: 0 var(--spacing-medium);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+/* Mobile Adjustments */
 @media screen and (max-width: 63.9375em) {
     .top-title {
-        padding: 0.5rem;
+        padding: var(--spacing-small);
+    }
+
+    .top-title h1 {
+        font-size: var(--font-size-large);
     }
 
     .sponsor-logo {
-        max-height: 50px;
+        max-height: var(--sponsor-logo-height-mobile);
+    }
+
+    .medium-h1 {
+        border: none;
+        padding: var(--spacing-small);
     }
 }

@@ -77,27 +77,69 @@ var FilterComponent = {
             }
         }
         $('#select-list').html(selectCategories);
+        $('#select-list-mobile').html(selectCategories);
 
         var selectCategories2 = '';
         for (var i in this.tabCategories2) {
             for (var j in this.tabCategories2[i]) {
                 selectCategories2 += 
                     '<div class="cell auto">' +
-                        '<img style="width:25px; height:25px;" src="images/icons/' + 
-                        mapConfig.formatIconName(j) + '.png">&nbsp ' + j +
+                        '<label class="actor-type-filter">' +
+                            '<input type="checkbox" class="visually-hidden actor-type-checkbox" ' +
+                                'checked ' +
+                                'data-type="' + j + '" ' +
+                                'data-original-icon="' + mapConfig.formatIconName(j) + '" ' +
+                                'onclick="FilterComponent.handleActorTypeChange(this);">' +
+                            '<div class="actor-type-content">' +
+                                '<img src="images/icons/' + mapConfig.formatIconName(j) + '.png" alt="' + j + '">' +
+                                '<span>' + j + '</span>' +
+                            '</div>' +
+                        '</label>' +
                     '</div>';
             }
         }
         $('#select-list2').html(selectCategories2);
+        $('#select-list2-mobile').html(selectCategories2);
     },
 
-    getCategorie: function(sousCategorie) {
-        for (var i in this.tabCategories) {
-            for (var j in this.tabCategories[i]) {
-                if (j == sousCategorie)
-                    return i;
+    handleActorTypeChange: function(checkbox) {
+        var $label = $(checkbox).closest('.actor-type-filter');
+        var $img = $label.find('img');
+        
+        if (checkbox.checked) {
+            $img.attr('src', 'images/icons/' + $(checkbox).data('original-icon') + '.png');
+        } else {
+            $img.attr('src', 'images/icons/aucun.png');
+        }
+        
+        this.updateDisplayByType();
+    },
+
+    updateDisplayByType: function() {
+        // Get unique active types (unchecked boxes types should be excluded)
+        var activeTypes = Array.from(new Set(
+            $('.actor-type-checkbox:not(:checked)').map(function() {
+                return $(this).data('type');
+            }).get()
+        ));
+    
+        map.removeLayer(markers);
+        markers.clearLayers();
+    
+        for (var idLayer in this.poiLayers) {
+            var currentLayer = this.poiLayers[idLayer];
+            var featureType = currentLayer.feature.properties.etape;
+    
+            // If type is in activeTypes, it should be excluded
+            var shouldExclude = activeTypes.indexOf(featureType) !== -1;
+            var categoryActive = this.isCategoryActive(currentLayer.feature);
+    
+            if (!shouldExclude && categoryActive) {
+                markers.addLayer(currentLayer.marker);
             }
         }
+    
+        map.addLayer(markers);
     },
 
     onDisplayCheckBoxChanged: function(idChangedElement, parentCategoryId) {
@@ -132,6 +174,14 @@ var FilterComponent = {
             }
         }
         map.addLayer(markers);
+    },
+    
+    isCategoryActive: function(feature) {
+        if (feature.properties.sous_cat != null) {
+            return this.tabCategories[feature.properties.categorie][feature.properties.sous_cat];
+        } else {
+            return this.tabCategories[feature.properties.categorie];
+        }
     }
 };
 

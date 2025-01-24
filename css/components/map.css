@@ -1,28 +1,85 @@
+/* Map Container */
 #mymap {
-    width: 100%;
-    height: calc(100vh - var(--header-height-large));
+    height: 100%;
+    background-color: var(--secondary-color);
 }
 
-@media screen and (max-width: 63.9375em) {
-    #mymap {
-        height: calc(100vh - var(--header-height-small));
-    }
-}
-
-/* Ensure off-canvas menu doesn't affect large screen layout */
-@media screen and (min-width: 64em) {
-    .off-canvas-content {
-        margin-top: 0 !important;
-    }
-}
-
-/* Map Controls */
+/* Leaflet Controls */
 .leaflet-control-zoom {
-    border: none;
-    box-shadow: var(--popup-shadow);
+    border: none !important;
+    box-shadow: 0 0 10px var(--shadow-color) !important;
 }
 
 .leaflet-touch .leaflet-control-layers {
-    border: none;
-    box-shadow: var(--popup-shadow);
+    border: none !important;
+    box-shadow: 0 0 10px var(--shadow-color) !important;
+}
+
+/* Cluster Markers */
+.marker-cluster {
+    background-clip: padding-box;
+    border-radius: 20px;
+}
+
+.marker-cluster div {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+    text-align: center;
+    border-radius: 15px;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+/* Search Control */
+.leaflet-control-search {
+    border: none !important;
+    box-shadow: 0 0 10px var(--shadow-color) !important;
+}
+
+.leaflet-control-search .search-input {
+    height: 2.4rem;
+    border-radius: var(--border-radius);
+    padding: 0 var(--spacing-medium);
+}
+
+/* Popup Styles */
+.leaflet-popup-content-wrapper {
+    border-radius: var(--border-radius);
+}
+
+.leaflet-popup-content {
+    margin: var(--spacing-medium);
+}
+
+
+.help-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    background-color: rgba(51, 51, 51, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    color: white;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.help-button:hover {
+    background-color: rgba(51, 51, 51, 0.9);
+}
+
+.help-button i {
+    font-size: 16px;
+}
+
+/* Ensure the button stays above map controls but below popups */
+.leaflet-popup {
+    z-index: 1001;
 }

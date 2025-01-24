@@ -1,0 +1,32 @@
+.reveal {
+    border-radius: var(--border-radius);
+    padding: var(--spacing-large);
+    border: none;
+    box-shadow: 0 0 20px var(--shadow-color);
+}
+
+.reveal h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-large);
+    padding-right: 2rem;
+    font-size: var(--font-size-large);
+}
+
+.reveal .close-button {
+    color: var(--text-color);
+    font-size: calc(var(--font-size-xlarge) * 1.2);
+    top: var(--spacing-medium);
+    right: var(--spacing-medium);
+}
+
+.reveal p {
+    line-height: 1.6;
+    margin-bottom: var(--spacing-medium);
+}
+
+@media screen and (max-width: 63.9375em) {
+    .reveal {
+        min-height: auto;
+        height: auto;
+    }
+}
