@@ -100,9 +100,9 @@
             <!-- Filters Section - Desktop -->
             <div class="filters show-for-large">
                 <div class="grid-x grid-padding-x">
-                    <div class="cell large-4">
+                    <div class="cell large-4 right-border">
                         <div class="grid-y">
-                            <div class="cell">
+                            <div class="cell text-center">
                                 <h2>Porte un dispositif dédié aux</h2>
                             </div>
                             <div class="cell" id="select-list">
@@ -110,9 +110,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cell large-4">
+                    <div class="cell large-5 right-border">
                         <div class="grid-y">
-                            <div class="cell">
+                            <div class="cell text-center">
                                 <h2>Typologie d'acteurs</h2>
                             </div>
                             <div class="cell" id="select-list2">
@@ -120,17 +120,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="cell large-2">
-                        <div class="grid-y">
-                            <div class="cell">
-                                <h2>Délimitation des EPCI Bretons</h2>
-                            </div>
-                            <div class="cell">
-                                <i class="fa-regular fa-window-minimize"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cell large-2">
+                    <div class="cell large-3 align-self-middle">
                         <div class="input-group search-container">
                             <input class="input-group-field" type="text" placeholder="Rechercher">
                             <div class="input-group-button">
@@ -189,16 +179,25 @@
                         <!-- Populated by JavaScript -->
                     </div>
                 </div>
-                <div class="cell">
-                    <h3>Délimitation des EPCI Bretons</h3>
-                    <i class="fa-regular fa-window-minimize"></i>
-                </div>
             </div>
         </div>
 
         <!-- Main content area -->
         <div class="off-canvas-content" data-off-canvas-content>
             <div id="mymap">
+                <div class="legend-container">
+                    <button id="legend-button" class="legend-button">
+                        <i class="fa-solid fa-book"></i>
+                        <span>Legend</span>
+                    </button>
+                    <div id="legend-panel" class="legend-panel">
+                        <div class="legend-item">
+                            <div class="line-icon"></div>
+                            <span>Délimitation des EPCI Bretons</span>
+                        </div>
+                    </div>
+                </div>
+
                 <button id="help-button" class="help-button" data-open="hints-modal">
                     <i class="fa-solid fa-question"></i>
                     <span>Help</span>

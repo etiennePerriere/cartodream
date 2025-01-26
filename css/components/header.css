@@ -22,33 +22,6 @@
     margin: var(--spacing-small) 0;
 }
 
-/* Filter Section */
-.filters {
-    background-color: var(--secondary-color);
-    border-bottom: var(--border-standard);
-    padding: var(--spacing-medium);
-}
-
-.filters h2 {
-    font-size: var(--font-size-base);
-    margin: 0 0 var(--spacing-small) 0;
-}
-
-/* Search Input */
-.input-group {
-    margin-bottom: 0;
-}
-
-.input-group-field {
-    height: 2.4rem;
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
-}
-
-.input-group-button .button {
-    height: 2.4rem;
-    padding: 0 var(--spacing-medium);
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-}
 
 /* Mobile Adjustments */
 @media screen and (max-width: 63.9375em) {

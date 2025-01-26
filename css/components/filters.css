@@ -1,11 +1,32 @@
 .filters {
     background-color: var(--secondary-color);
     border-bottom: 1px solid var(--border-color);
-    padding: 15px;
+    padding: var(--spacing-small);
 }
 
-.filters .input-group {
-    margin: 0;
+.filters .right-border{
+    border-right: 1px solid var(--border-color);
+}
+
+.filters h2 {
+    font-size: var(--font-size-medium);
+    margin: 0 0 var(--spacing-small) 0;
+}
+
+/* Search Input */
+.input-group {
+    margin-bottom: 0;
+}
+
+.input-group-field {
+    height: 2.4rem;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.input-group-button .button {
+    height: 2.4rem;
+    padding: 0 var(--spacing-medium);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 /* Custom checkbox styles */
@@ -13,40 +34,121 @@
     display: none;
 }
 
+#select-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.filter-item-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#select-list .cell {
+    flex: 0 1 auto;
+    width: auto;
+}
+
+
 .custom-label {
-    position: relative;
-    padding-left: 35px;
-    cursor: pointer;
-    display: inline-block;
+    display: inline-flex !important;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    transform-origin: left center;
 }
 
 .custom-label::before {
     content: "";
-    position: absolute;
-    left: 7px;
-    top: -3px;
-    width: var(--checkbox-size);
-    height: var(--checkbox-size);
-    border: 2px solid var(--text-color);
-    border-radius: 4px;
-    background-color: var(--white);
+    width: 28px;
+    height: 28px;
+    margin-bottom: 0.5rem;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Check mark */
 .custom-checkbox:checked + .custom-label::before {
-    background-color: var(--checkbox-check-color);
-    border-color: var(--checkbox-check-color);
+    content: "✔";
+    font-size: 20px;
+    color: white;
+    background-color: #4CAF50;
+    border-color: #4CAF50;
 }
 
-.custom-checkbox:checked + .custom-label::after {
-    content: "✔";
-    position: absolute;
-    left: 11px;
-    top: -5px;
+/* Active state */
+.custom-checkbox:checked + .custom-label {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Hover */
+.custom-label:hover::before {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Active/pressed state */
+.custom-label:active::before {
+    transform: scale(0.95);
+}
+
+/* Hover on checked state */
+.custom-checkbox:checked + .custom-label:hover {
+    transform: scale(1.05);
+}²
+
+/* Unchecked state */
+.custom-checkbox:not(:checked) + .custom-label {
+    transform: scale(0.95);
+    opacity: 0.5;
+}
+
+/* Focus state for accessibility */
+.custom-checkbox:focus-visible + .custom-label {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Mobile styles */
+.off-canvas .custom-label {
     color: var(--white);
-    font-size: var(--font-size-normal);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-small);
+    padding: 0.75rem;
 }
 
 /* ACTOR TYPE FILTERS */
+#select-list2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+}
+
 /* Hide actual checkbox but keep it accessible */
 .visually-hidden {
     position: absolute;
@@ -67,22 +169,22 @@
 
 .actor-type-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
+    text-align: center;
     padding: 0.5rem;
     transform-origin: left center;
     transition: all 0.3s ease;
 }
 
 .actor-type-filter img {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
+    margin-bottom: 0.5rem;
     transition: all 0.3s ease;
 }
 
 .actor-type-filter span {
-    transition: all 0.3s ease;
-    white-space: nowrap;
 }
 
 /* Checked state and hover */
@@ -96,7 +198,9 @@
 
 .actor-type-filter input:checked ~ .actor-type-content img,
 .actor-type-filter input:checked ~ .actor-type-content span {
+    transition: all 0.3s ease;
     opacity: 1;
+    line-height: 1;
 }
 
 /* Unchecked state */

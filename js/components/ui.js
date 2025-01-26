@@ -4,6 +4,7 @@ var UIComponent = {
         this.updateHints();
         this.initializeOffCanvas();
         this.showInitialHints();
+        this.initializeLegend();
     },
 
     updateTitle: function() {
@@ -48,6 +49,27 @@ var UIComponent = {
                 }, 300);
             }
         });
+    },
+
+    initializeLegend: function() {
+        var button = document.getElementById('legend-button');
+        var panel = document.getElementById('legend-panel');
+        
+        if (button && panel) {
+            button.onclick = function(e) {
+                console.log('Button clicked');
+                e.stopPropagation();
+                this.classList.toggle('open');
+                panel.classList.toggle('open');
+            };
+
+            document.addEventListener('click', function(e) {
+                if (!button.contains(e.target)) {
+                    button.classList.remove('open');
+                    panel.classList.remove('open');
+                }
+            });
+        }
     }
 };
 

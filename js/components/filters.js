@@ -69,10 +69,12 @@ var FilterComponent = {
         for (var i in this.tabCategories) {
             for (var j in this.tabCategories[i]) {
                 selectCategories += 
-                    '<div class="cell auto">' +
-                        '<input type="checkbox" id="' + j + '" class="custom-checkbox"' +
-                        'checked="true" onclick="FilterComponent.onDisplayCheckBoxChanged(\'' + j + '\', \'' + i + '\');">' +
-                        '<label for="' + j + '" class="custom-label">' + j + '</label>' +
+                    '<div class="cell filter-item">' +
+                        '<div class="filter-item-content">' +
+                            '<input type="checkbox" id="' + j + '" class="custom-checkbox"' +
+                            'checked="true" onclick="FilterComponent.onDisplayCheckBoxChanged(\'' + j + '\', \'' + i + '\');">' +
+                            '<label for="' + j + '" class="custom-label">' + j + '</label>' +
+                        '</div>' +
                     '</div>';
             }
         }
@@ -83,7 +85,7 @@ var FilterComponent = {
         for (var i in this.tabCategories2) {
             for (var j in this.tabCategories2[i]) {
                 selectCategories2 += 
-                    '<div class="cell auto">' +
+                    '<div class="cell auto filter-type-item">' +
                         '<label class="actor-type-filter">' +
                             '<input type="checkbox" class="visually-hidden actor-type-checkbox" ' +
                                 'checked ' +
