@@ -20,6 +20,15 @@
 }
 
 /* Off-canvas Menu */
+#filter-offcanvas {
+    top: var(--header-height-mobile) !important;
+    height: calc(100vh - var(--header-height-mobile)) !important;
+}
+
+.is-open#filter-offcanvas {
+    transform: translateX(0) !important;
+}
+
 .off-canvas {
     background-color: var(--overlay-bg);
     padding: var(--spacing-medium);
