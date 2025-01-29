@@ -1,9 +1,3 @@
-/* Map Container */
-#mymap {
-    height: 100%;
-    background-color: var(--secondary-color);
-}
-
 /* Leaflet Controls */
 .leaflet-control-zoom {
     border: none !important;

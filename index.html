@@ -158,50 +158,53 @@
             </div>
         </header>
 
-        <!-- Filters Section - Mobile - Off canvas menu -->
-        <div class="off-canvas position-left" id="filter-offcanvas" data-off-canvas>
-            <div class="grid-y grid-padding-y">
-                <div class="cell">
-                    <h2>Filtres</h2>
-                    <button class="close-button" aria-label="Close menu" type="button" data-close>
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="cell">
-                    <h3>Porte un dispositif dédié aux</h3>
-                    <div id="select-list-mobile">
-                        <!-- Populated by JavaScript -->
+        <!-- Main content with mobile filters and map -->
+        <div class="off-canvas-wrapper">
+            <!-- Filters Section - Mobile - Off canvas menu -->
+            <div class="off-canvas-absolute position-left" id="filter-offcanvas" data-off-canvas>
+                <div class="grid-y grid-padding-y">
+                    <div class="cell">
+                        <h2>Filtres</h2>
+                        <button class="close-button" aria-label="Close menu" type="button" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-                <div class="cell">
-                    <h3>Typologie d'acteurs</h3>
-                    <div id="select-list2-mobile">
-                        <!-- Populated by JavaScript -->
+                    <div class="cell">
+                        <h3>Porte un dispositif dédié aux</h3>
+                        <div id="select-list-mobile">
+                            <!-- Populated by JavaScript -->
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main content area -->
-        <div class="off-canvas-content" data-off-canvas-content>
-            <div id="mymap">
-                <div class="legend-container">
-                    <button id="legend-button" class="legend-button">
-                        <i class="fa-solid fa-book"></i>
-                        <span>Legend</span>
-                    </button>
-                    <div id="legend-panel" class="legend-panel">
-                        <div class="legend-item">
-                            <div class="line-icon"></div>
-                            <span>Délimitation des EPCI Bretons</span>
+                    <div class="cell">
+                        <h3>Typologie d'acteurs</h3>
+                        <div id="select-list2-mobile">
+                            <!-- Populated by JavaScript -->
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <button id="help-button" class="help-button" data-open="hints-modal">
-                    <i class="fa-solid fa-question"></i>
-                    <span>Help</span>
-                </button>
+            <!-- Main content area -->
+            <div class="off-canvas-content" data-off-canvas-content>
+                <div id="mymap">
+                    <div class="legend-container">
+                        <button id="legend-button" class="legend-button">
+                            <i class="fa-solid fa-book"></i>
+                            <span>Legend</span>
+                        </button>
+                        <div id="legend-panel" class="legend-panel">
+                            <div class="legend-item">
+                                <div class="line-icon"></div>
+                                <span>Délimitation des EPCI Bretons</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="help-button" class="help-button" data-open="hints-modal">
+                        <i class="fa-solid fa-question"></i>
+                        <span>Help</span>
+                    </button>
+                </div>
             </div>
         </div>
 

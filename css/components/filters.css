@@ -70,6 +70,7 @@
     text-align: center;
     transition: all 0.3s ease;
     transform-origin: left center;
+    line-height: 1.4;
 }
 
 .custom-label::before {
@@ -197,7 +198,7 @@
 .actor-type-filter input:checked ~ .actor-type-content span {
     transition: all 0.3s ease;
     opacity: 1;
-    line-height: 1;
+    line-height: 1.4;
 }
 
 /* Unchecked state */
@@ -208,6 +209,7 @@
 .actor-type-filter input:not(:checked) ~ .actor-type-content img,
 .actor-type-filter input:not(:checked) ~ .actor-type-content span {
     opacity: 0.5;
+    line-height: 1.4;
 }
 
 /* Focus styles for keyboard navigation */
