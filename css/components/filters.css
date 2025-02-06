@@ -131,15 +131,6 @@
     border-radius: 4px;
 }
 
-/* Mobile styles */
-.off-canvas .custom-label {
-    color: var(--white);
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: var(--border-radius);
-    margin-bottom: var(--spacing-small);
-    padding: 0.75rem;
-}
-
 /* ACTOR TYPE FILTERS */
 #select-list2 {
     display: flex;
@@ -165,7 +156,7 @@
 /* Actor Type Filters */
 .actor-type-filter {
     cursor: pointer;
-    display: block; /* Labels are inline by default */
+    display: block;
 }
 
 .actor-type-content {
@@ -231,7 +222,7 @@
 }
 /* END ACTOR TYPE FILTERS */
 
-/* Mobile Filter Menu */
+/* MOBILE FILTER MENU */
 #filter-offcanvas {
     background-color: var(--overlay-bg);
     color: var(--white);
@@ -245,7 +236,6 @@
     top: 0.5rem;
     right: 0.5rem;
 }
-
 .filter-button {
     margin: 0;
     padding: 0.5rem 1rem;
@@ -255,4 +245,14 @@
     padding: 0.5rem;
     background-color: var(--secondary-color);
     border-bottom: 1px solid var(--border-color);
+}
+
+
+/* Mobile styles */
+#filter-offcanvas .custom-label {
+    color: var(--white);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-small);
+    padding: 0.75rem;
 }
