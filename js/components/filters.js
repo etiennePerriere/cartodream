@@ -17,8 +17,8 @@ var FilterComponent = {
     },
 
     processFeatures: function() {
-        for (var i = 0; i < poi.features.length; i++) {
-            var currentFeature = poi.features[i];
+        for (var i = 0; i < mapPOIs.features.length; i++) {
+            var currentFeature = mapPOIs.features[i];
             
             // Categories initialization
             if (this.tabCategories[currentFeature.properties.categorie] == null) {

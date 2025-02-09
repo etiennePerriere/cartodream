@@ -10,14 +10,14 @@ var MapComponent = {
         
         // Setup communes layer
         var bat = L.geoJson(
-            communes,
-            { style: mapConfig.styles.communes }
+            mapLines,
+            { style: mapConfig.styles.mapLines }
         ).addTo(map);
         routeLayers["bat"] = bat;
 
         // Initialize sentiers
-        var sentiers_pdipr = L.geoJson(
-            sentiersPDIPR,
+        var mapPOIs = L.geoJson(
+            mapPOIs,
             { style: mapConfig.styles.trails }
         );
 
@@ -46,11 +46,14 @@ var MapComponent = {
     },
 
     createMarker: function(feature, latlng) {
-        if (((feature.properties.sous_cat) != null) && ((feature.properties.sous_cat) != "")) {
-            return new L.Marker(latlng, {
-                icon: mapConfig.createIcon(feature.properties.etape),
-                title: feature.properties.nom
-            });
+        if ((feature.properties.sous_cat != null) && (feature.properties.sous_cat != "")) {
+            return new L.Marker(
+                latlng,
+                {
+                    icon: mapConfig.createIcon(feature.properties.sous_cat),
+                    title: feature.properties.nom
+                }
+            );
         }
     }
 };

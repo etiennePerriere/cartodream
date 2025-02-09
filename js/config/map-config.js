@@ -36,8 +36,8 @@ var mapConfig = {
         buildings: function() {
             return siteConfig.styles.buildings;
         },
-        communes: function() {
-            return siteConfig.styles.communes;
+        mapLines: function() {
+            return siteConfig.styles.mapLines;
         },
         trails: function(feature) {
             return Object.assign({}, siteConfig.styles.trails, {

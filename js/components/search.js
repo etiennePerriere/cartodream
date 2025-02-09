@@ -11,7 +11,7 @@ var SearchComponent = {
             threshold: 0.3,
             includeMatches: true
         };
-        this.fuse = new Fuse(poi.features, options);
+        this.fuse = new Fuse(mapPOIs.features, options);
     },
 
     setupSearchListeners: function() {

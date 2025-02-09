@@ -23,14 +23,17 @@ var siteConfig = {
         }
     },
 
-    // Map Configuration
+    /********************
+    * MAP CONFIGURATION *
+    ********************/
     map: {
         center: {
-            lat: 48.231310963576654,
-            lng: -3.2563495712161874
+            lat: 48.81826349423801,
+            lng: 1.6032443265782088
         },
-        defaultZoom: 7.5,
+        defaultZoom: 11,
         maxZoom: 20,
+        zoomControl : false,
         tileLayer: {
             url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
         }
@@ -49,7 +52,7 @@ var siteConfig = {
     // Icon Configuration
     icons: {
         default: {
-            size: [30, 30],
+            size: [25, 25],
             anchor: [13, 13],
             popupAnchor: [0, -13]
         }
@@ -63,11 +66,13 @@ var siteConfig = {
             borderColor: '#0f0f0f',
             fillOpacity: 0
         },
-        communes: {
-            weight: 1,
+        mapLines: {
+            weight: 2,
             opacity: 1,
-            color: '#0f0f0f',
-            fillOpacity: 0
+            color: '#9f5cc0',
+            fillColor: '#9f5cc0',
+            fillOpacity: 0.2,
+            interactive: false,
         },
         trails: {
             weight: 9,
