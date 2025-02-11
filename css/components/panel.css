@@ -1,0 +1,100 @@
+/* Base Panel Styles */
+.panel {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px var(--shadow-color);
+    margin: var(--spacing-medium);
+    pointer-events: auto;
+}
+
+/* Logo & Search Panel */
+.logo-search-panel {
+    width: 450px;
+    height: 100px;
+    margin: var(--spacing-medium);
+    display: flex;
+    align-items: center;
+}
+
+.logo-search-panel .logo {
+    height: 100px;
+    width: auto;
+    padding: var(--spacing-medium);
+    object-fit: contain;
+}
+
+.logo-search-panel .input-group {
+    margin-bottom: 0;
+}
+
+/* Categories Panel */
+.categories-panel {
+    width: 450px;
+    margin: var(--spacing-medium);
+    padding: var(--spacing-medium);
+}
+
+.categories-panel .grid-x {
+    margin: calc(var(--spacing-medium) * -1);
+}
+
+.category-item {
+    padding: var(--spacing-medium);
+    text-align: center;
+    transition: background-color var(--transition-speed);
+    height: 120px; /* Fixed height to accommodate icon + text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-item:hover {
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.category-item img {
+    width: 40px;  /* Adjust if needed */
+    height: 40px; /* Adjust if needed */
+    margin-bottom: var(--spacing-small);
+}
+
+.category-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: var(--spacing-small);
+    object-fit: contain;
+}
+
+/* Sub-categories Panel */
+.subcategories-panel {
+    width: 450px;
+    margin: var(--spacing-medium);
+    padding: var(--spacing-medium);
+}
+
+.subcategory-item {
+    padding: var(--spacing-medium);
+}
+
+.subcategory-item .grid-x {
+    min-height: 80px; /* Gives enough space for icon + text */
+    align-items: center;
+}
+
+
+.subcategory-icon,
+.selected-subcategory img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+
+/* Selected Sub-categories Panel */
+.selected-subcategories-panel {
+    width: 450px;
+    margin: var(--spacing-medium);
+    padding: var(--spacing-medium);
+}

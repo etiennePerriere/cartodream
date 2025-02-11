@@ -3,6 +3,7 @@
 @import 'base/layout.css';
 
 /* Component Styles */
+@import 'components/panel.css';
 @import 'components/filters.css';
 @import 'components/header.css';
 @import 'components/map.css';

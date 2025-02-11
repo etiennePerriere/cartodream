@@ -41,6 +41,6 @@
     --overlay-bg: rgba(89, 79, 84, 0.95);
     
     /* Borders */
-    --border-radius: 4px;
+    --border-radius: 15px;
     --border-standard: 1px solid var(--border-color);
 }

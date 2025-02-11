@@ -58,152 +58,136 @@
     </head>
 
     <body onload="initialize();">
-        <header>
-            <!-- Title and Sponsors - Desktop -->
-            <div class="top-title show-for-medium">
-                <div class="grid-x align-middle">
-                    <div class="cell medium-3 large-2 text-center">
-                        <img src="images/sponsors/bdt.jpg" class="sponsor-logo" alt="Sponsor 1">
-                    </div>
-                    <div class="cell medium-6 large-8 text-center">
-                        <h1 data-js-fill-id="map_title" class="medium-h1"></h1>
-                    </div>
-                    <div class="cell medium-3 large-2 text-center">
-                        <img src="images/sponsors/rb.jpg" class="sponsor-logo" alt="Sponsor 2">
-                    </div>
-                </div>
-            </div>
 
-            <!-- Title and Sponsors - Mobile -->
-            <div class="top-title show-for-small-only">
-                <div class="grid-y">
-                    <div class="cell text-center">
-                        <h1 data-js-fill-id="map_title"></h1>
-                    </div>
-                    <div class="grid-x">
-                        <div class="cell small-6 text-center">
-                            <img src="images/sponsors/bdt.jpg" class="sponsor-logo" alt="Sponsor 1">
+        <!-- Top panels container -->
+        <div class="top-panels-container">
+            <div class="grid-container fluid">
+                <div class="grid-x grid-margin-x">
+                    <!-- Left Column for main panels -->
+                    <div class="cell shrink">
+                        <!-- Logo & Search Panel -->
+                        <div class="panel logo-search-panel">
+                            <!-- Regular state -->
+                            <div class="grid-x align-middle" data-panel="regular-search">
+                                <div class="cell shrink">
+                                    <img src="images/sponsors/logo.jpg" alt="Logo" class="logo">
+                                </div>
+                                <div class="cell auto">
+                                    <div class="input-group search-container">
+                                        <input class="input-group-field" type="text" placeholder="Rechercher">
+                                        <div class="input-group-button">
+                                            <button type="submit" class="button">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                            <!-- Focused state -->
+                            <div class="grid-x align-middle hide" data-panel="focused-search">
+                                <div class="cell auto">
+                                    <div class="input-group search-container">
+                                        <input class="input-group-field" type="text" placeholder="Rechercher">
+                                        <div class="input-group-button">
+                                            <button type="submit" class="button">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- Search Results Dropdown -->
+                                    <div class="search-results"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="cell small-6 text-center">
-                            <img src="images/sponsors/rb.jpg" class="sponsor-logo" alt="Sponsor 2">
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Filters Section - Desktop -->
-            <div class="filters show-for-large">
-                <div class="grid-x grid-padding-x">
-                    <div class="cell large-4 right-border">
-                        <div class="grid-y">
-                            <div class="cell text-center">
-                                <h2>Porte un dispositif dédié aux</h2>
-                            </div>
-                            <div class="cell" id="select-list">
-                                <!-- Populated by JavaScript -->
+                        <!-- Categories Panel -->
+                        <div class="panel categories-panel">
+                            <div class="grid-x grid-padding-x grid-padding-y small-up-2 medium-up-4">
+                                <!-- Categories will be populated here -->
                             </div>
                         </div>
-                    </div>
-                    <div class="cell large-5 right-border">
-                        <div class="grid-y">
-                            <div class="cell text-center">
-                                <h2>Typologie d'acteurs</h2>
-                            </div>
-                            <div class="cell" id="select-list2">
-                                <!-- Populated by JavaScript -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cell large-3 align-self-middle">
-                        <div class="input-group search-container">
-                            <input class="input-group-field" type="text" placeholder="Rechercher">
-                            <div class="input-group-button">
-                                <button type="submit" class="button">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                            <div class="search-results"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Filters Section - Mobile - Filter button & research -->
-            <div class="mobile-controls hide-for-large">
-                <div class="grid-x grid-padding-x align-middle">
-                    <div class="cell small-3">
-                        <button type="button" class="button filter-button" data-toggle="filter-offcanvas">
-                            <i class="fa-solid fa-filter"></i>
-                            <span>Filtres</span>
-                        </button>
-                    </div>
-                    <div class="cell small-9">
-                        <div class="input-group search-container">
-                            <input class="input-group-field" type="text" placeholder="Rechercher">
-                            <div class="input-group-button">
-                                <button type="submit" class="button">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                            <div class="search-results"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Main content with mobile filters and map -->
-        <div class="off-canvas-wrapper">
-            <!-- Filters Section - Mobile - Off canvas menu -->
-            <div class="off-canvas-absolute position-left" id="filter-offcanvas" data-off-canvas>
-                <div class="grid-y grid-padding-y">
-                    <div class="cell">
-                        <h3>Porte un dispositif dédié aux</h3>
-                        <div id="select-list-mobile">
-                            <!-- Populated by JavaScript -->
-                        </div>
-                    </div>
-                    <div class="cell">
-                        <h3>Typologie d'acteurs</h3>
-                        <div id="select-list2-mobile">
-                            <!-- Populated by JavaScript -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main content area -->
-            <div class="off-canvas-content" data-off-canvas-content>
-                <div id="mymap">
-                    <div class="legend-container">
-                        <button id="legend-button" class="legend-button">
-                            <i class="fa-solid fa-book"></i>
-                            <span>Legend</span>
-                        </button>
-                        <div id="legend-panel" class="legend-panel">
-                            <div class="legend-item">
-                                <div class="line-icon"></div>
-                                <span>Délimitation des EPCI Bretons</span>
+                        <!-- Sub-categories Panel -->
+                        <div class="panel subcategories-panel hide">
+                            <div class="grid-y">
+                                <!-- Header -->
+                                <div class="grid-x align-justify align-middle subcategories-header">
+                                    <div class="cell shrink">
+                                        <button class="button clear back-to-categories">
+                                            <i class="fa-solid fa-arrow-left"></i>
+                                        </button>
+                                    </div>
+                                    <div class="cell shrink">
+                                        <button class="button small select-all-button">Select All</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- List of subcategories -->
+                                <div id="subcategories-list">
+                                        <!-- Subcategories will be populated here -->
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <button id="help-button" class="help-button" data-open="hints-modal">
-                        <i class="fa-solid fa-question"></i>
-                        <span>Help</span>
-                    </button>
+                    <!-- Right Column for selected subcategories -->
+                    <div class="cell shrink">
+                        <!-- Selected Sub-categories Panel -->
+                        <div class="panel selected-subcategories-panel hide">
+                            <div class="grid-x align-middle grid-padding-x">
+                                <div class="cell auto">
+                                    <div class="grid-x grid-padding-x grid-padding-y" id="selected-subcategories-list">
+                                        <!-- Selected subcategories will be populated here -->
+                                    </div>
+                                </div>
+                                <div class="cell shrink">
+                                    <button class="button alert clear remove-all">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Hints Modal -->
-        <div class="reveal" id="hints-modal" data-reveal>
-            <h3 id="hint_title"></h3>
-            <div id="hint_content"></div>
-            <button class="close-button" data-close aria-label="Close modal" type="button">
-                <span aria-hidden="true">&times;</span>
+        <!-- Mobile Header -->
+        <div class="mobile-header hide-for-medium">
+            <div class="grid-x align-middle">
+                <div class="cell shrink">
+                    <img src="images/sponsors/logo.jpg" alt="Logo" class="logo">
+                </div>
+                <div class="cell auto">
+                    <div class="input-group search-container">
+                        <input class="input-group-field" type="text" placeholder="Rechercher">
+                        <div class="input-group-button">
+                            <button type="submit" class="button">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Filter Button -->
+        <div class="hide-for-medium">
+            <button class="button filter-button" data-toggle="mobile-filter-panel">
+                <i class="fa-solid fa-filter"></i>
+                <span>Filtres</span>
             </button>
         </div>
+
+        <!-- Mobile Filter Panel -->
+        <div class="reveal" id="mobile-filter-panel" data-reveal>
+            <!-- Content similar to desktop panels but restructured for mobile -->
+        </div>
+
+        <!-- Map Container -->
+        <div id="mymap"></div>
 
         <!-- Foundation and Utilities -->
         <script src="script/jquery.js"></script>
