@@ -116,13 +116,15 @@ var FilterComponent = {
         const searchInputs = document.querySelectorAll('.search-container input');
         const regularSearch = document.querySelector('[data-panel="regular-search"]');
         const focusedSearch = document.querySelector('[data-panel="focused-search"]');
+        const categoriesPanel = document.querySelector('.categories-panel');
 
         searchInputs.forEach(input => {
             // Handle focus
             input.addEventListener('focus', () => {
                 regularSearch.classList.add('hide');
                 focusedSearch.classList.remove('hide');
-                focusedSearch.querySelector('input').focus()
+                categoriesPanel.classList.add('hide');
+                focusedSearch.querySelector('input').focus();
             });
             
             // Handle blur
@@ -133,6 +135,7 @@ var FilterComponent = {
                     if (!stillInSearch) {
                         focusedSearch.classList.add('hide');
                         regularSearch.classList.remove('hide');
+                        categoriesPanel.classList.remove('hide')
                     }
                 }, 100);
             });

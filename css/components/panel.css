@@ -3,15 +3,14 @@
     background: var(--white);
     border-radius: var(--border-radius);
     box-shadow: 0 2px 8px var(--shadow-color);
+    width: 450px;
     margin: var(--spacing-medium);
     pointer-events: auto;
 }
 
 /* Logo & Search Panel */
 .logo-search-panel {
-    width: 450px;
     height: 100px;
-    margin: var(--spacing-medium);
     display: flex;
     align-items: center;
 }
@@ -19,7 +18,8 @@
 .logo-search-panel .logo {
     height: 100px;
     width: auto;
-    padding: var(--spacing-medium);
+    padding-top: var(--spacing-small);
+    padding-bottom: var(--spacing-small);
     object-fit: contain;
 }
 
@@ -27,16 +27,33 @@
     margin-bottom: 0;
 }
 
+.logo-search-panel .input-group-field {
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.logo-search-panel .input-group-button .button {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+[data-panel="focused-search"] {
+    width: 100%;
+}
+
+.search-container {
+    position: relative;
+}
 /* Categories Panel */
+
+/* VERIFIER SI UTILE LORSQUE PLUSIEURS CATEGROEIES
+
 .categories-panel {
-    width: 450px;
-    margin: var(--spacing-medium);
     padding: var(--spacing-medium);
 }
 
 .categories-panel .grid-x {
     margin: calc(var(--spacing-medium) * -1);
 }
+*/
 
 .category-item {
     padding: var(--spacing-medium);
@@ -47,6 +64,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.category-item span {
+    font-size: var(--font-size-small);
 }
 
 .category-item:hover {
@@ -75,26 +96,62 @@
 }
 
 .subcategory-item {
-    padding: var(--spacing-medium);
+    transition: background-color var(--transition-speed);
+    /*padding: var(--spacing-medium);*/
+}
+
+.subcategory-item:hover {
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
 }
 
 .subcategory-item .grid-x {
-    min-height: 80px; /* Gives enough space for icon + text */
-    align-items: center;
+    min-height: 60px;
+}
+
+.custom-checkbox>input[type="checkbox"] {
+    margin: 0;
 }
 
 
 .subcategory-icon,
 .selected-subcategory img {
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
 }
 
 
 /* Selected Sub-categories Panel */
 .selected-subcategories-panel {
+    position: relative;
     width: 450px;
     margin: var(--spacing-medium);
     padding: var(--spacing-medium);
+}
+
+.selected-subcategory {
+    position: relative;
+}
+
+.remove-subcategory {
+    position: absolute;
+    top: -15px;
+    right: -20px;
+    cursor: pointer;
+    color: var(--primary-color);
+    padding: 5px;
+}
+
+.remove-subcategory:hover {
+    filter: brightness(50%);
+}
+
+button.remove-all {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: var(--font-size-xlarge);
+    padding: 0;
 }
