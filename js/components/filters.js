@@ -4,6 +4,10 @@ var FilterComponent = {
     currentCategory: null,           // Currently displayed category
     poiLayers: new Array(),         // Store map markers/features
 
+    sanitizeId: function(string) {
+        return string.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
+    },
+
     initialize: function() {
         // First clear any existing markers
         markers.clearLayers();
@@ -171,9 +175,9 @@ var FilterComponent = {
                         <div class="cell shrink">
                             <div class="custom-checkbox">
                                 <input type="checkbox" 
-                                    id="check_${subCat}" 
+                                    id="check_${this.sanitizeId(subCat)}" 
                                     ${this.selectedSubCategories.has(subCat) ? 'checked' : ''}>
-                                <label for="check_${subCat}"></label>
+                                <label for="check_${this.sanitizeId(subCat)}"></label>
                             </div>
                         </div>
                     </div>
@@ -235,6 +239,7 @@ var FilterComponent = {
         this.updateDisplay();
     },
 
+    // Update the selected subcategories panel
     updateSelectedPanel: function() {
         const panel = document.querySelector('.selected-subcategories-panel');
         const container = document.querySelector('#selected-subcategories-list');
@@ -263,7 +268,7 @@ var FilterComponent = {
             btn.addEventListener('click', (e) => {
                 const subCat = e.currentTarget.dataset.subcategory;
                 this.toggleSubCategory(subCat, false);
-                const checkbox = document.querySelector(`#check_${subCat}`);
+                const checkbox = document.querySelector(`#check_${this.sanitizeId(subCat)}`);
                 if (checkbox) {
                     checkbox.checked = false;
                 }
@@ -271,6 +276,7 @@ var FilterComponent = {
         });
     },
 
+    // Update the map display based on selected subcategories
     updateDisplay: function() {
         map.removeLayer(markers);
         markers.clearLayers();
@@ -285,6 +291,7 @@ var FilterComponent = {
         map.addLayer(markers);
     },
 
+    // Check if a layer should be visible based on selected subcategories
     isLayerVisible: function(layer) {
         const subCategory = layer.feature.properties.sous_cat;
         return this.selectedSubCategories.size === 0 || this.selectedSubCategories.has(subCategory);
