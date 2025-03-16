@@ -32,16 +32,6 @@ body {
 }
 
 
-
-
-/*
-.subcategories-panel .grid-padding-x {
-    padding-left: var(--spacing-medium);
-    padding-right: var(--spacing-medium);
-}
-*/
-
-
 /* Utility Classes */
 .text-center {
     text-align: center;
@@ -50,6 +40,22 @@ body {
 .right-border {
     border-right: var(--border-standard);
 }
+
+.base-button {
+    background: none;
+    color: var(--text-color);
+    font-weight: bold;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-small) var(--spacing-medium);
+    cursor: pointer;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.base-button:hover {
+    background-color: var(--secondary-color);
+}
+
 
 /* Mobile Styles */
 @media screen and (max-width: 63.9375em) {
