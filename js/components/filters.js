@@ -3,6 +3,8 @@ var FilterComponent = {
     selectedSubCategories: new Set(), // Currently selected subcategories
     currentCategory: null,           // Currently displayed category
     poiLayers: new Array(),         // Store map markers/features
+    selectAllBtn: null,
+    unselectAllBtn: null,
 
     sanitizeId: function(string) {
         return string.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
@@ -17,9 +19,6 @@ var FilterComponent = {
         this.processFeatures();
         this.createFilterLists();
         this.setupEventListeners();
-        
-        // Add markers to map after all processing is done
-        map.addLayer(markers);
     },
 
     // Data Processing Methods
@@ -99,9 +98,15 @@ var FilterComponent = {
         }
 
         // Select all button
-        const selectAllBtn = document.querySelector('.select-all-button');
-        if (selectAllBtn) {
-            selectAllBtn.addEventListener('click', () => this.selectAllSubCategories());
+        this.selectAllBtn = document.querySelector('.select-all-button');
+        if (this.selectAllBtn) {
+            this.selectAllBtn.addEventListener('click', () => this.selectAllSubCategories());
+        }
+
+        // Unselect all button
+        this.unselectAllBtn = document.querySelector('.unselect-all-button');
+        if (this.unselectAllBtn) {
+            this.unselectAllBtn.addEventListener('click', () => this.removeAllSelected());
         }
 
         // Remove all selected
@@ -174,8 +179,8 @@ var FilterComponent = {
                         </div>
                         <div class="cell shrink">
                             <div class="custom-checkbox">
-                                <input type="checkbox" 
-                                    id="check_${this.sanitizeId(subCat)}" 
+                                <input type="checkbox"
+                                    id="check_${this.sanitizeId(subCat)}"
                                     ${this.selectedSubCategories.has(subCat) ? 'checked' : ''}>
                                 <label for="check_${this.sanitizeId(subCat)}"></label>
                             </div>
@@ -195,6 +200,7 @@ var FilterComponent = {
         }
 
         this.updateSelectedPanel();
+        this.updateSelectionButtons();
     },
 
     toggleSubCategory: function(subCategory, selected) {
@@ -205,6 +211,7 @@ var FilterComponent = {
         }
         this.updateSelectedPanel();
         this.updateDisplay();
+        this.updateSelectionButtons();
     },
 
     selectAllSubCategories: function() {
@@ -221,6 +228,7 @@ var FilterComponent = {
         
         this.updateSelectedPanel();
         this.updateDisplay();
+        this.updateSelectionButtons();
     },
 
     removeAllSelected: function() {
@@ -237,6 +245,34 @@ var FilterComponent = {
         
         this.updateSelectedPanel();
         this.updateDisplay();
+        this.updateSelectionButtons();
+    },
+
+    // Update the "Select/Unselect all" buttons based on current selection
+    updateSelectionButtons: function() {
+        if (!this.currentCategory) return;
+        
+        // Get count of all possible subcategories for current category
+        const totalSubcategories = this.categories[this.currentCategory].size;
+        
+        // Count how many of those are currently selected
+        let selectedCount = 0;
+        this.categories[this.currentCategory].forEach(subCat => {
+            if (this.selectedSubCategories.has(subCat)) {
+                selectedCount++;
+            }
+        });
+        
+        // If all subcategories are selected, show "Unselect all" button
+        if (selectedCount === totalSubcategories) {
+            this.selectAllBtn.classList.add('hide');
+            this.unselectAllBtn.classList.remove('hide');
+        } 
+        // If no subcategories are selected, show "Select all" button
+        else {
+            this.unselectAllBtn.classList.add('hide');
+            this.selectAllBtn.classList.remove('hide');
+        }
     },
 
     // Update the selected subcategories panel
@@ -291,10 +327,10 @@ var FilterComponent = {
         map.addLayer(markers);
     },
 
-    // Check if a layer should be visible based on selected subcategories
+    // Check if a layer (map markers) should be visible based on selected subcategories
     isLayerVisible: function(layer) {
         const subCategory = layer.feature.properties.sous_cat;
-        return this.selectedSubCategories.size === 0 || this.selectedSubCategories.has(subCategory);
+        return this.selectedSubCategories.has(subCategory);
     },
 
     // Mobile Methods
