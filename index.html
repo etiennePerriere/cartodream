@@ -59,15 +59,18 @@
 
     <body onload="initialize();">
 
-        <!-- Top panels container -->
-        <div class="top-panels-container">
+        <!-- Desktop panels container -->
+        <div class="desktop-panels-container show-for-medium">
             <div class="grid-container fluid">
                 <div class="grid-x grid-margin-x">
-                    <!-- Left Column for main panels -->
+
+                    <!-- Main panels (logo, search and categories list) -->
                     <div class="cell shrink">
+
                         <!-- Logo & Search Panel -->
                         <div class="panel logo-search-panel">
-                            <!-- Regular state -->
+
+                            <!-- Default state: logo & search -->
                             <div class="grid-x align-middle grid-padding-x" data-panel="regular-search">
                                 <div class="cell shrink">
                                     <img src="images/sponsors/logo.jpg" alt="Logo" class="logo">
@@ -83,8 +86,8 @@
                                     </div>
                                 </div>
                             </div>
-                                
-                            <!-- Focused state -->
+
+                            <!-- Search focus state: no logo, only search input -->
                             <div class="grid-x align-middle grid-padding-x align-center hide" data-panel="focused-search">
                                 <div class="cell auto">
                                     <div class="input-group search-container">
@@ -95,8 +98,7 @@
                                             </button>
                                         </div>
                                         <!-- Search Results Dropdown -->
-                                        <div class="
-                                        "></div>
+                                        <div class=""></div>
                                     </div>
                                 </div>
                             </div>
@@ -125,16 +127,15 @@
                                     </div>
                                 </div>
                                 
-                                <!-- List of subcategories -->
+                                <!-- Subcategories -->
                                 <div id="subcategories-list">
-                                        <!-- Subcategories will be populated here -->
+                                    <!-- Subcategories will be populated here -->
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
-                    <!-- Right Column for selected subcategories -->
+                    <!-- Selected subcategories panel (hidden when no subcategory selected) -->
                     <div class="cell shrink">
                         <!-- Selected Sub-categories Panel -->
                         <div class="panel selected-subcategories-panel hide">
@@ -153,37 +154,39 @@
                 </div>
             </div>
         </div>
+        <!-- END desktop panels -->
 
-        <!-- Mobile Header -->
-        <div class="mobile-header hide-for-medium">
-            <div class="grid-x align-middle">
-                <div class="cell shrink">
-                    <img src="images/sponsors/logo.jpg" alt="Logo" class="logo">
-                </div>
-                <div class="cell auto">
-                    <div class="input-group search-container">
-                        <input class="input-group-field" type="text" placeholder="Rechercher">
-                        <div class="input-group-button">
-                            <button type="submit" class="button">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
+        <!-- Mobile -->
+         <div class="hide-for-medium">
+            <!-- Mobile Header -->
+            <div class="mobile-header">
+                <div class="grid-x align-middle">
+                    <div class="cell shrink">
+                        <img src="images/sponsors/logo.jpg" alt="Logo" class="logo">
+                    </div>
+                    <div class="cell auto">
+                        <div class="input-group search-container">
+                            <input class="input-group-field" type="text" placeholder="Rechercher">
+                            <div class="input-group-button">
+                                <button type="submit" class="button">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Mobile Filter Button -->
-        <div class="hide-for-medium">
+            <!-- Mobile Filter Button -->
             <button class="button filter-button" data-toggle="mobile-filter-panel">
                 <i class="fa-solid fa-filter"></i>
                 <span>Filtres</span>
             </button>
-        </div>
 
-        <!-- Mobile Filter Panel -->
-        <div class="reveal" id="mobile-filter-panel" data-reveal>
-            <!-- Content similar to desktop panels but restructured for mobile -->
+            <!-- Mobile Filter Panel -->
+            <div id="mobile-filter-panel">
+                <!-- Content similar to desktop panels but restructured for mobile -->
+            </div>
         </div>
 
         <!-- Map Container -->

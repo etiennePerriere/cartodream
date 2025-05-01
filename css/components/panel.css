@@ -23,24 +23,21 @@
     object-fit: contain;
 }
 
-.logo-search-panel .input-group {
+.search-container {
+    position: relative;
     margin-bottom: 0;
 }
 
-.logo-search-panel .input-group-field {
+.search-container .input-group-field {
     border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 
-.logo-search-panel .input-group-button .button {
+.search-container .input-group-button .button {
     border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 
 [data-panel="focused-search"] {
     width: 100%;
-}
-
-.search-container {
-    position: relative;
 }
 
 

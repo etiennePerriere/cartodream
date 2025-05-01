@@ -17,7 +17,8 @@ var FilterComponent = {
         
         // Process data and setup UI
         this.processFeatures();
-        this.createFilterLists();
+        this.fillDesktopFilters();
+        this.createMobileFilterPanel();
         this.setupEventListeners();
     },
 
@@ -64,21 +65,63 @@ var FilterComponent = {
         });
     },
 
+    // Create list of categories
+    createFilterList: function() {
+        return Object.keys(this.categories).map(category => `
+            <div class="cell" data-category="${category}">
+                <div class="category-item">
+                    <img src="images/icons/${mapConfig.formatIconName(category)}.png" 
+                         alt="${category}" 
+                         class="category-icon">
+                    <span>${category}</span>
+                </div>
+            </div>
+        `).join('');
+    },
+
     // UI Methods
-    createFilterLists: function() {
-        // Create categories grid
+    fillDesktopFilters: function() {
         const categoriesContainer = document.querySelector('.categories-panel .grid-x');
         if (categoriesContainer) {
-            categoriesContainer.innerHTML = Object.keys(this.categories).map(category => `
-                <div class="cell" data-category="${category}">
-                    <div class="category-item">
-                        <img src="images/icons/${mapConfig.formatIconName(category)}.png" 
-                             alt="${category}" 
-                             class="category-icon">
-                        <span>${category}</span>
-                    </div>
-                </div>
-            `).join('');
+            categoriesContainer.innerHTML = this.createFilterList();
+        }
+    },
+
+    createMobileFilterPanel: function() {
+        const mobilePanel = document.querySelector('#mobile-filter-panel');
+        if (!mobilePanel) return;
+        
+        // Clone the desktop categories grid for mobile
+        const categoriesContent = document.querySelector('.categories-panel .grid-x').cloneNode(true);
+        
+        // Title and close button
+        mobilePanel.innerHTML = `
+            <div class="grid-x grid-padding-x grid-padding-y small-up-3">
+                ${categoriesContent.innerHTML}
+            </div>
+        `;
+        
+        // Re-attach event listeners to the cloned elements
+        mobilePanel.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const category = e.currentTarget.closest('[data-category]').dataset.category;
+                this.showSubCategories(category);
+                mobilePanel.classList.remove('is-open');
+                this.closeMobileFilterPanel();
+            });
+        });
+    },
+
+    // Handle clicks outside the panel
+    handleOutsideClick: function(event) {
+        const panel = document.querySelector('#mobile-filter-panel');
+        const filterBtn = document.querySelector('.filter-button');
+        
+        // If panel is open and click is outside the panel and not on the filter button
+        if (panel.classList.contains('is-open') && 
+            !panel.contains(event.target) && 
+            !filterBtn.contains(event.target)) {
+            this.closeMobileFilterPanel();
         }
     },
 
@@ -119,6 +162,11 @@ var FilterComponent = {
         const filterBtn = document.querySelector('.filter-button');
         if (filterBtn) {
             filterBtn.addEventListener('click', () => this.toggleMobileFilters());
+        }
+
+        const closeBtn = document.querySelector('#mobile-filter-panel .close-button');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => this.closeMobileFilterPanel());
         }
 
         // Search related

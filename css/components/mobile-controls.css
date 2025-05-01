@@ -1,119 +1,57 @@
 /* Mobile Controls Bar */
-.mobile-controls {
-    background-color: var(--secondary-color);
-    border-bottom: var(--border-standard);
-    padding: var(--spacing-small);
+.filter-button {
+    position: fixed;
+    bottom: 20px;  /* Distance from bottom of screen */
+    left: 50%;
+    transform: translateX(-50%);  /* Center horizontally */
+    padding: 12px 24px;  /* Make it bigger */
+    border-radius: 30px;  /* Round corners */
+    background-color: white;  /* White background */
+    color: var(--black);;  /* Black text */
+    font-weight: bold;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    z-index: var(--z-header);
+    transition: background-color var(--transition-speed) ease;
 }
 
-.filter-button {
-    width: 100%;
-    margin: 0;
-    padding: var(--spacing-small) var(--spacing-medium);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-small);
+.filter-button:hover {
+    background-color: #f0f0f0;  /* Light grey background on hover */
+    color: var(--black);
 }
 
 .filter-button i {
-    font-size: var(--font-size-base);
+    margin-right: 8px;  /* Space between icon and text */
 }
 
 
-.is-open#filter-offcanvas {
-    transform: translateX(0) !important;
-}
 
-.off-canvas {
-    background-color: var(--overlay-bg);
+/* Mobile Filter Panel */
+#mobile-filter-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 60vh;
+    background: var(--white);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    box-shadow: 0 -2px 8px var(--shadow-color);
+    z-index: var(--z-header);
     padding: var(--spacing-medium);
+    transform: translateY(100%); /* Start hidden below the screen */
+    transition: transform var(--transition-speed) ease;
     overflow-y: auto;
 }
 
-.off-canvas h2 {
-    color: var(--white);
-    font-size: var(--font-size-large);
-    margin: 0 0 var(--spacing-large) 0;
-    padding-right: 2rem;
+#mobile-filter-panel.is-open {
+    transform: translateY(0); /* Slide up when open */
 }
 
-.off-canvas h3 {
-    color: var(--white);
-    font-size: var(--font-size-base);
-    margin: var(--spacing-medium) 0 var(--spacing-small) 0;
-}
-
-.off-canvas .close-button {
-    color: var(--white);
-    font-size: calc(var(--font-size-xlarge) * 1.5);
-    top: var(--spacing-small);
-    right: var(--spacing-small);
-    padding: var(--spacing-small);
-}
-
-/* Mobile Filter Lists */
-#select-list-mobile,
-#select-list2-mobile {
-    padding: var(--spacing-small);
-}
-
-/* Mobile Filter Checkboxes */
-.off-canvas .cell {
-    margin-bottom: var(--spacing-medium);
-}
-
-.off-canvas .custom-label {
-    color: var(--white);
-    padding: var(--spacing-medium) var(--spacing-medium) var(--spacing-medium) 45px;
-    display: block;
-    font-size: var(--font-size-base);
-    line-height: 1.4;
-    border-radius: var(--border-radius);
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 0;
-    transition: background-color var(--transition-speed);
-}
-
-.off-canvas .custom-label:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.off-canvas .custom-label::before {
-    width: 24px;
-    height: 24px;
-    left: var(--spacing-medium);
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.off-canvas .custom-checkbox:checked + .custom-label::after {
-    left: calc(var(--spacing-medium) + 4px);
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-}
-
-/* Type Icons in Mobile View */
-#select-list2-mobile .cell {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: var(--spacing-medium);
-    border-radius: var(--border-radius);
-    margin-bottom: var(--spacing-small);
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-medium);
-    color: var(--white);
-}
-
-#select-list2-mobile img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-}
-
-/* Section Dividers */
-.off-canvas .cell + h3 {
-    margin-top: var(--spacing-large);
-    padding-top: var(--spacing-large);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+#mobile-filter-panel .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
 }
